@@ -5,6 +5,7 @@ import axios from "axios";
 import Email from "../../components/Email";
 import Senha from "../../components/Senha";
 import BotoesNav from "../../components/BotoesNav";
+import Titulo from "../../components/Titulo";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -33,12 +34,10 @@ function Cadastro() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-center text-black font-bold text-4xl pb-5 mt-10">
-        Cadastrar
-      </h1>
+    <div className="flex flex-col text-black items-center justify-center">
+      <Titulo>Cadastrar</Titulo>
       <form onSubmit={handleSubmit}>
-        <div className="text-black pb-8">
+        <div className="pb-8">
           <div></div>
           <p className=" pt-5">Nome:</p>
           <input

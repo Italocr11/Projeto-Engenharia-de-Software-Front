@@ -3,7 +3,8 @@
 import FundoFormularios from "../../components/fundoFormularios";
 import { useRouter } from "next/navigation";
 import Email from "../../components/Email";
-import BotoesNav from "@/components/BotoesNav";
+import BotoesNav from "../../components/BotoesNav";
+import Titulo from "../../components/Titulo";
 
 export default function () {
   var textProx = "Enviar";
@@ -12,9 +13,7 @@ export default function () {
   return (
     <FundoFormularios>
       <div className="flex flex-col items-center text-black justify-center">
-        <h1 className="text-center font-bold text-4xl pb-5 mt-10">
-          Recuperar senha
-        </h1>
+        <Titulo>Recuperar senha</Titulo>
         <Email></Email>
         <BotoesNav
           textProx={textProx}

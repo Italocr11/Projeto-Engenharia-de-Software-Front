@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Email from "../../components/Email";
 import Senha from "../../components/Senha";
 import BotoesNav from "@/components/BotoesNav";
+import Titulo from "../../components/Titulo";
 
 function Login() {
   const router = useRouter();
@@ -18,7 +19,7 @@ function Login() {
   return (
     <FundoFormularios>
       <div className="flex flex-col items-center justify-center text-black">
-        <h1 className="text-center font-bold text-4xl pb-5 mt-10">Login</h1>
+        <Titulo>Login</Titulo>
         <Email></Email>
         <Senha></Senha>
         <BotoesNav
@@ -31,7 +32,7 @@ function Login() {
           <ArrowRight />
           <button
             onClick={() => {
-              router.push("/recuperarsenha");
+              router.push("/recuperarSenha");
             }}
             className="m-1"
           >
