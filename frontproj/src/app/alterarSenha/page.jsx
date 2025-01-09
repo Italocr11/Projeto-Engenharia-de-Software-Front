@@ -3,16 +3,20 @@ import FundoFormulariosInt from "../../components/FundoFormulariosInt";
 import Interface from "../../components/Interface";
 import Email from "../../components/Email";
 import Titulo from "../../components/Titulo";
+import Senha from "../../components/Senha";
 import BotaoEnviarInt from "../../components/BotaoEnviarInt";
 
 function AlterarSenha() {
-  var enviar = "/alterarsenha2";
+  var str0 = "Atual";
+  var str = "Nova";
+
   return (
     <Interface>
       <FundoFormulariosInt>
         <Titulo>Alterar senha</Titulo>
-        <Email></Email>
-        <BotaoEnviarInt enviar={enviar}></BotaoEnviarInt>
+        <Senha str0={str0}></Senha>
+        <Senha str={str}></Senha>
+        <BotaoEnviarInt></BotaoEnviarInt>
       </FundoFormulariosInt>
     </Interface>
   );

@@ -1,11 +1,14 @@
 import { useState } from "react";
 
-const Senha = ({ str }) => {
+const Senha = ({ str, str0 }) => {
   const [senha, setSenha] = useState("");
 
   return (
     <div>
-      <p className=" pt-5">{str} Senha:</p>
+      <p className=" pt-5">
+        {str0}
+        {str} Senha:
+      </p>
       <input
         type="password"
         placeholder="********"
