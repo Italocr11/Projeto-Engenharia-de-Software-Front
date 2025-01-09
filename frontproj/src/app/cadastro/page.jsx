@@ -82,7 +82,14 @@ function Cadastro() {
           ></input>
         </div>
         <div className=" text-black space-x-10 flex justify-between mb-10">
-          <button className=" bg-blue-400 p-2 rounded">Login</button>
+          <button
+            onClick={() => {
+              router.push("/login");
+            }}
+            className=" bg-blue-400 p-2 rounded"
+          >
+            Login
+          </button>
           <button type="submit" className="bg-blue-600 p-2 rounded">
             Cadastrar
           </button>
