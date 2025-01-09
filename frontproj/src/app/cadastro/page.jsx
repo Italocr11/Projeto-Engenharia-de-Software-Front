@@ -17,6 +17,7 @@ function Cadastro() {
   var textAnt = "Login";
   var navAnt = "/login";
   var textProx = "Cadastrar";
+  var navProx = "/interfacePrincipal";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,6 +73,7 @@ function Cadastro() {
             navAnt={navAnt}
             textAnt={textAnt}
             textProx={textProx}
+            navProx={navProx}
           ></BotoesNav>
         </div>
       </form>

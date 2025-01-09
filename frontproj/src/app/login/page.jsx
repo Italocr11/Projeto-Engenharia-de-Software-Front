@@ -13,6 +13,7 @@ function Login() {
   var textAnt = "Cadastrar";
   var navAnt = "/";
   var textProx = "Login";
+  var navProx = "/interfacePrincipal";
 
   return (
     <FundoFormularios>
@@ -24,6 +25,7 @@ function Login() {
           textAnt={textAnt}
           navAnt={navAnt}
           textProx={textProx}
+          navProx={navProx}
         ></BotoesNav>
         <div className="text-red-700 flex items-center mb-10">
           <ArrowRight />

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-const BotoesNav = ({ navAnt, textAnt, textProx }) => {
+const BotoesNav = ({ navAnt, textAnt, textProx, navProx }) => {
   const router = useRouter();
   return (
     <div className=" text-black space-x-10 flex justify-between mb-10 mt-10">
@@ -13,7 +13,13 @@ const BotoesNav = ({ navAnt, textAnt, textProx }) => {
       >
         {textAnt}
       </button>
-      <button type="submit" className="bg-blue-600 p-2 rounded">
+      <button
+        onClick={() => {
+          router.push(navProx);
+        }}
+        type="submit"
+        className="bg-blue-600 p-2 rounded"
+      >
         {textProx}
       </button>
     </div>
