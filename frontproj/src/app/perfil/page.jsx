@@ -1,8 +1,12 @@
+"use client";
 import Interface from "@/components/Interface";
 import InterfacePrincipal from "../interfacePrincipal/page";
 import { User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function Perfil() {
+  const router = useRouter();
+
   return (
     <Interface>
       <div className="flex flex-col items-center justify-center">
@@ -32,7 +36,13 @@ function Perfil() {
           </button>
         </div>
         <div className="mt-14 bg-yellow-600 p-2 rounded-md">
-          <button>Solicitar mudança de senha</button>
+          <button
+            onClick={() => {
+              router.push("/alterarSenha");
+            }}
+          >
+            Solicitar mudança de senha
+          </button>
         </div>
       </div>
     </Interface>

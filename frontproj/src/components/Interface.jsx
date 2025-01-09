@@ -10,7 +10,7 @@ export default function Interface({ children }) {
   const router = useRouter();
 
   return (
-    <div className="bg-white h-screen">
+    <div className="bg-white overflow-hidden h-screen">
       <header className="bg-yellow-400 h-1/6 flex flex-row flex-1 text-black items-center justify-between">
         <button
           onClick={() => {
@@ -35,8 +35,8 @@ export default function Interface({ children }) {
           <span>Perfil</span>
         </button>
       </header>
-      <div className="flex flex-row flex-1 h-full text-black">
-        <nav className="bg-blue-400 w-1/6 flex flex-col space-y-20 items-center justify-start pt-10 ">
+      <div className="flex flex-row flex-1 h-[calc(100vh-6rem)] text-black">
+        <nav className="bg-blue-400 w-1/6 flex flex-col space-y-20 items-center justify-start overflow-y-auto pt-10 ">
           <button
             href="#"
             className="flex items-center hover:text-gray-700 pt-2"
@@ -47,7 +47,9 @@ export default function Interface({ children }) {
             <Album className="mr-3" /> Histórico de horários
           </button>
         </nav>
-        <main className="bg-gray-100 flex-1 p-10">{children}</main>
+        <main className="bg-gray-100 flex-1 p-10 overflow-y-auto">
+          {children}
+        </main>
       </div>
     </div>
   );
