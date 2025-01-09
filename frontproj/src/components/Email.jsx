@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const Email = () => {
+const Email = ({ str }) => {
   const [email, setEmail] = useState("");
 
   return (
     <div>
-      <p className="pt-5">E-mail:</p>
+      <p className="pt-5"> {str} E-mail:</p>
       <input
         type="email"
         placeholder="Inserir e-mail"

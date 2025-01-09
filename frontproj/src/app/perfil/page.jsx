@@ -31,7 +31,12 @@ function Perfil() {
         <div className="flex flex-row space-x-3">
           <p>Email:</p>
           <input></input>
-          <button className="bg-yellow-400 p-1 rounded hover:text-gray-800">
+          <button
+            onClick={() => {
+              router.push("/alterarEmail");
+            }}
+            className="bg-yellow-400 p-1 rounded hover:text-gray-800"
+          >
             Solicitar alteração
           </button>
         </div>
