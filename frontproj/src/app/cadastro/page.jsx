@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
+import Email from "../../components/Email";
+import Senha from "../../components/Senha";
+import BotoesNav from "../../components/BotoesNav";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -12,7 +14,9 @@ function Cadastro() {
   const [telefone, setTelefone] = useState("");
   const [msg, setMsg] = useState("");
 
-  const router = useRouter();
+  var textAnt = "Login";
+  var navAnt = "/login";
+  var textProx = "Cadastrar";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,24 +48,8 @@ function Cadastro() {
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           ></input>
-          <p className=" pt-5">E-mail:</p>
-          <input
-            type="email"
-            placeholder="Inserir e-mail"
-            maxLength="50"
-            className="border rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <p className=" pt-5">Senha:</p>
-          <input
-            type="password"
-            placeholder="********"
-            maxLength="20"
-            className="border rounded"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          ></input>
+          <Email></Email>
+          <Senha></Senha>
           <p className=" pt-5">Confirmar Senha:</p>
           <input
             type="password"
@@ -80,19 +68,11 @@ function Cadastro() {
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
           ></input>
-        </div>
-        <div className=" text-black space-x-10 flex justify-between mb-10">
-          <button
-            onClick={() => {
-              router.push("/login");
-            }}
-            className=" bg-blue-400 p-2 rounded"
-          >
-            Login
-          </button>
-          <button type="submit" className="bg-blue-600 p-2 rounded">
-            Cadastrar
-          </button>
+          <BotoesNav
+            navAnt={navAnt}
+            textAnt={textAnt}
+            textProx={textProx}
+          ></BotoesNav>
         </div>
       </form>
       {msg && <p>{msg}</p>}
