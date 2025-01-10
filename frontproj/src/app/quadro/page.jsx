@@ -17,9 +17,9 @@ function Quadro() {
           <h1 className="text-center font-bold text-2xl mb-5 mt-6">
             Selecionar data
           </h1>
-          <input type="date" className></input>
+          <input type="date"></input>
           <BotaoEnviarInt></BotaoEnviarInt>
-          <div className="fle flex-col items-center justify-center space-y-2 mt-5">
+          <div className="items-center justify-center space-y-2 mt-5">
             <h3 className="text-center font-bold mt-6">
               Equipamentos necessários:
             </h3>
