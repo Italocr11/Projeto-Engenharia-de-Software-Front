@@ -1,15 +1,12 @@
+"use client";
 import BotaoEnviarInt from "@/components/BotaoEnviarInt";
 import Interface from "../../components/Interface";
 import Titulo from "../../components/Titulo";
 import SelecionarHorario from "../../components/SelecionarHorario";
-
-function expHorarios() {
-  for (let i = 0; i < 0; i++) {
-    <h1>Opa</h1>;
-  }
-}
+import { useRouter } from "next/navigation";
 
 function Quadro() {
+  const router = useRouter();
   return (
     <Interface>
       <h1 className="text-center font-bold text-4xl pb-5">
@@ -17,16 +14,37 @@ function Quadro() {
       </h1>
       <div className="flex flex-row h-5/6 space-x-10">
         <div className="flex flex-col items-center justify-start bg-yellow-300 w-2/6 rounded-md">
-          <h1 className="text-center font-bold text-2xl mb-5 mt-20">
+          <h1 className="text-center font-bold text-2xl mb-5 mt-6">
             Selecionar data
           </h1>
-          <input type="date"></input>
+          <input type="date" className></input>
           <BotaoEnviarInt></BotaoEnviarInt>
+          <div className="fle flex-col items-center justify-center space-y-2 mt-5">
+            <h3 className="text-center font-bold mt-6">
+              Equipamentos necessários:
+            </h3>
+
+            <div className="space-x-2">
+              <input type="checkbox" className="h-5 w-5"></input>
+              <label>Bola </label>
+            </div>
+            <div className="space-x-2">
+              <input type="checkbox" className="h-5 w-5"></input>
+              <label>Rede </label>
+            </div>
+            <div className="space-x-2">
+              <input type="checkbox" className="h-5 w-5"></input>
+              <label>Coletes </label>
+            </div>
+          </div>
           <button
             type="submit"
-            className="bg-green-500 p-2 rounded hover:text-gray-800 mt-24"
+            className="bg-green-500 p-2 rounded hover:text-gray-800 mt-5"
+            onClick={() => {
+              router.push("/solicitarReserva");
+            }}
           >
-            Confirmar selecionados
+            Solicitar
           </button>
         </div>
         <div className="flex flex-col bg-yellow-300 w-4/6 rounded-md overflow-hidden">
