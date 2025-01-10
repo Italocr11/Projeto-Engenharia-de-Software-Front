@@ -12,7 +12,7 @@ function BotaoEnviarInt({ enviar }) {
       type="submit"
       className="bg-blue-600 p-2 rounded hover:text-gray-800 mt-10"
     >
-      Enviar
+      Confirmar
     </button>
   );
 }

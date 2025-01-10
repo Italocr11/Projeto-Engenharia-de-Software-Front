@@ -40,6 +40,9 @@ export default function Interface({ children }) {
           <button
             href="#"
             className="flex items-center hover:text-gray-700 pt-2"
+            onClick={() => {
+              router.push("./quadro");
+            }}
           >
             <Calendar className="mr-3" /> Quadro de horários
           </button>
