@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import Email from "../../components/Email";
 import Senha from "../../components/Senha";
-import BotoesNav from "@/components/BotoesNav";
+import BotoesNav from "../../components/BotoesNav";
 import Titulo from "../../components/Titulo";
 
 function Login() {
