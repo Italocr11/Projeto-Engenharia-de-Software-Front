@@ -60,7 +60,13 @@ export default function Interface({ children }) {
           >
             <Calendar className="mr-3" /> Quadro de horários
           </button>
-          <button href="#" className="flex items-center hover:text-gray-700">
+          <button
+            href="#"
+            className="flex items-center hover:text-gray-700"
+            onClick={() => {
+              router.push("/historico");
+            }}
+          >
             <Album className="mr-3" /> Histórico de horários
           </button>
         </nav>
