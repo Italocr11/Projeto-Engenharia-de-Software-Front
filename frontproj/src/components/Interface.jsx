@@ -5,12 +5,21 @@ import { Album } from "lucide-react";
 import { Calendar } from "lucide-react";
 import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import GuiaNotf from "./GuiaNotf";
 
 export default function Interface({ children }) {
   const router = useRouter();
+  const [notf, setNotf] = useState(false);
+
+  function toggleNotf() {
+    if (notf === true) {
+      setNotf(!notf);
+    }
+  }
 
   return (
-    <div className="bg-white overflow-hidden h-screen">
+    <div className="bg-white overflow-hidden h-screen" onClick={toggleNotf}>
       <header className="bg-yellow-400 h-1/6 flex flex-row flex-1 text-black items-center justify-between">
         <button
           onClick={() => {
@@ -21,7 +30,12 @@ export default function Interface({ children }) {
           <h1 className="text-lg">Horário para quadras</h1>
         </button>
 
-        <button className="hover:text-gray-700">
+        <button
+          className="hover:text-gray-700"
+          onClick={() => {
+            setNotf(!notf);
+          }}
+        >
           <Bell />
         </button>
 
@@ -46,7 +60,13 @@ export default function Interface({ children }) {
           >
             <Calendar className="mr-3" /> Quadro de horários
           </button>
-          <button href="#" className="flex items-center hover:text-gray-700">
+          <button
+            href="#"
+            className="flex items-center hover:text-gray-700"
+            onClick={() => {
+              router.push("/historico");
+            }}
+          >
             <Album className="mr-3" /> Histórico de horários
           </button>
         </nav>
@@ -54,6 +74,7 @@ export default function Interface({ children }) {
           {children}
         </main>
       </div>
+      {notf && <GuiaNotf></GuiaNotf>}
     </div>
   );
 }
