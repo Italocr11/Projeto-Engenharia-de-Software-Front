@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Senha = ({ str, str0 }) => {
-  const [senha, setSenha] = useState("");
-
+const Senha = ({ str, str0, senha, setSenha }) => {
   return (
     <div>
       <p className=" pt-5">
