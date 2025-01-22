@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import Email from "../../components/Email";
 import Senha from "../../components/Senha";
-import BotoesNav from "../../components/BotoesNav";
 import Titulo from "../../components/Titulo";
 
 function Login() {
@@ -22,12 +21,25 @@ function Login() {
         <Titulo>Login</Titulo>
         <Email></Email>
         <Senha></Senha>
-        <BotoesNav
-          textAnt={textAnt}
-          navAnt={navAnt}
-          textProx={textProx}
-          navProx={navProx}
-        ></BotoesNav>
+        <div className=" text-black space-x-10 flex justify-between mb-10 mt-10 ">
+          <button
+            onClick={() => {
+              router.push("/");
+            }}
+            className=" bg-blue-400 p-2 rounded hover:text-gray-800"
+          >
+            {textAnt}
+          </button>
+          <button
+            onClick={() => {
+              router.push("/interfacePrincipal");
+            }}
+            type="submit"
+            className="bg-blue-600 p-2 rounded hover:text-gray-800"
+          >
+            {textProx}
+          </button>
+        </div>
         <div className="text-red-700 flex items-center mb-10">
           <ArrowRight />
           <button

@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Email = ({ str }) => {
-  const [email, setEmail] = useState("");
-
+const Email = ({ str, email, setEmail }) => {
   return (
     <div>
       <p className="pt-5"> {str} E-mail:</p>
