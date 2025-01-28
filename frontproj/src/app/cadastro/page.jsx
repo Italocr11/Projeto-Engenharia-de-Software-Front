@@ -46,7 +46,6 @@ function Cadastro() {
         "http://localhost:3000/usuarios",
         usuario
       );
-      setMsg("Cadastro realizado!");
       router.push("/interfacePrincipal");
     } catch (erro) {
       setMsg(
@@ -74,7 +73,7 @@ function Cadastro() {
             type="text"
             placeholder="Inserir nome"
             maxLength="30"
-            className="border rounded"
+            className="border rounded px-3 py-2 w-full mt-1"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           ></input>
@@ -86,7 +85,7 @@ function Cadastro() {
             type="tel"
             placeholder="(  ) _____-____"
             maxLength="15"
-            className="border rounded"
+            className="border rounded px-3 py-2 w-full mt-1"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
             pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
@@ -101,8 +100,7 @@ function Cadastro() {
           </div>
         </div>
       </form>
-
-      {msg && <p>{msg}</p>}
+      {msg && <div className="text-red-800 mb-5">{msg}</div>}
     </div>
   );
 }

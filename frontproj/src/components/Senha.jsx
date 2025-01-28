@@ -11,7 +11,7 @@ const Senha = ({ str, str0, senha, setSenha }) => {
         type="password"
         placeholder="********"
         maxLength="20"
-        className="border rounded"
+        className="border rounded px-3 py-2 w-full mt-1"
         value={senha}
         onChange={(e) => setSenha(e.target.value)}
       ></input>
