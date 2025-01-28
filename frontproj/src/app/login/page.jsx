@@ -44,6 +44,12 @@ function Login() {
       const { email } = resposta.data.usuario;
       localStorage.setItem("userEmail", email);
 
+      const { nome } = resposta.data.usuario;
+      localStorage.setItem("userNome", nome);
+
+      const { telefone } = resposta.data.usuario;
+      localStorage.setItem("userTel", telefone);
+
       router.push("/interfacePrincipal");
     } catch (erro) {
       setMsg(

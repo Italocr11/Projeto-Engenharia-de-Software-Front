@@ -28,7 +28,7 @@ function AlterarSenha() {
   const confirmar = async (e) => {
     e.preventDefault();
 
-    if (!email || !senha || !senhaNova) {
+    if (!senha || !senhaNova) {
       setMsg("Preencha os campos!");
       return;
     }
