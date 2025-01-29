@@ -69,6 +69,14 @@ export default function Interface({ children }) {
           >
             <Album className="mr-3" /> Histórico de horários
           </button>
+          <button
+            className="flex items-center hover:text-gray-700 bg-blue-500 w-full h-12 justify-center"
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            Sair
+          </button>
         </nav>
         <main className="bg-gray-100 flex-1 p-10 overflow-y-auto">
           {children}

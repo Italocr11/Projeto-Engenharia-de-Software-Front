@@ -1,40 +1,69 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
 import Email from "../../components/Email";
 import Senha from "../../components/Senha";
-import BotoesNav from "../../components/BotoesNav";
 import Titulo from "../../components/Titulo";
 
 function Cadastro() {
+  const router = useRouter();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [confsenha, setConfsenha] = useState("");
   const [telefone, setTelefone] = useState("");
   const [msg, setMsg] = useState("");
-
-  var textAnt = "Login";
-  var navAnt = "/login";
-  var textProx = "Cadastrar";
-  var navProx = "/interfacePrincipal";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuario = { nome, email, senha, confsenha, telefone };
+    if (nome.trim() === "") {
+      return setMsg("O campo nome não está preenchido!");
+    }
+
+    if (email.trim() === "") {
+      return setMsg("O campo email não está preenchido!");
+    }
+
+    if (senha.trim() === "") {
+      return setMsg("O campo senha não está preenchido!");
+    }
+
+    if (telefone.trim() === "") {
+      return setMsg("O campo telefone não está preenchido!");
+    }
+
+    if (senha.length < 8) {
+      return setMsg("Senha muito curta!");
+    }
+
+    const usuario = { nome, email, senha, telefone };
 
     try {
-      const resposta = await axios.post("https...", usuario);
-      setMsg("Cadastro realizado!");
+      const resposta = await axios.post(
+        "http://localhost:3000/usuarios",
+        usuario
+      );
+      router.push("/interfacePrincipal");
     } catch (erro) {
-      setMsg("");
+      setMsg(
+        erro.response?.data?.message || "Erro ao cadastrar. Tente novamente."
+      );
     }
   };
 
   return (
-    <div className="flex flex-col text-black items-center justify-center">
+    <div className="flex flex-col text-black items-center justify-center mt-10">
+      <button
+        onClick={() => {
+          router.push("/login");
+        }}
+        className=" bg-blue-400 p-2 rounded hover:text-gray-800"
+      >
+        Ir para login
+      </button>
       <Titulo>Cadastrar</Titulo>
       <form onSubmit={handleSubmit}>
         <div className="pb-8">
@@ -44,39 +73,34 @@ function Cadastro() {
             type="text"
             placeholder="Inserir nome"
             maxLength="30"
-            className="border rounded"
+            className="border rounded px-3 py-2 w-full mt-1"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           ></input>
-          <Email></Email>
-          <Senha></Senha>
-          <p className=" pt-5">Confirmar Senha:</p>
-          <input
-            type="password"
-            placeholder="********"
-            maxLength="20"
-            className="border rounded"
-            value={confsenha}
-            onChange={(e) => setConfsenha(e.target.value)}
-          ></input>
+          <Email setEmail={setEmail} email={email}></Email>
+          <Senha setSenha={setSenha} senha={senha}></Senha>
+
           <p className=" pt-5">Telefone:</p>
           <input
             type="tel"
             placeholder="(  ) _____-____"
             maxLength="15"
-            className="border rounded"
+            className="border rounded px-3 py-2 w-full mt-1"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
+            pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
           ></input>
-          <BotoesNav
-            navAnt={navAnt}
-            textAnt={textAnt}
-            textProx={textProx}
-            navProx={navProx}
-          ></BotoesNav>
+          <div className="flex items-center justify-center mt-5">
+            <button
+              type="submit"
+              className="bg-blue-600 p-2 rounded hover:text-gray-800"
+            >
+              Cadastrar
+            </button>
+          </div>
         </div>
       </form>
-      {msg && <p>{msg}</p>}
+      {msg && <div className="text-red-800 mb-5">{msg}</div>}
     </div>
   );
 }

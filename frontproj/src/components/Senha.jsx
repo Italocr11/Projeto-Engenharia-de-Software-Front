@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Senha = ({ str, str0 }) => {
-  const [senha, setSenha] = useState("");
-
+const Senha = ({ str, str0, senha, setSenha }) => {
   return (
     <div>
       <p className=" pt-5">
@@ -13,7 +11,7 @@ const Senha = ({ str, str0 }) => {
         type="password"
         placeholder="********"
         maxLength="20"
-        className="border rounded"
+        className="border rounded px-3 py-2 w-full mt-1"
         value={senha}
         onChange={(e) => setSenha(e.target.value)}
       ></input>

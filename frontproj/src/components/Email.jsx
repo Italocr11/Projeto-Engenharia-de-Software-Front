@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Email = ({ str }) => {
-  const [email, setEmail] = useState("");
-
+const Email = ({ str, email, setEmail }) => {
   return (
     <div>
       <p className="pt-5"> {str} E-mail:</p>
@@ -10,7 +8,7 @@ const Email = ({ str }) => {
         type="email"
         placeholder="Inserir e-mail"
         maxLength="50"
-        className="border rounded"
+        className="border rounded px-3 py-2 w-full mt-1"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       ></input>

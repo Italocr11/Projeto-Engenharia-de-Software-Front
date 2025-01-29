@@ -6,7 +6,7 @@ import Email from "../../components/Email";
 import BotoesNav from "../../components/BotoesNav";
 import Titulo from "../../components/Titulo";
 
-export default function () {
+export default function RecuperarSenha() {
   var textProx = "Enviar";
   var textAnt = "Login";
   var navAnt = "/login";

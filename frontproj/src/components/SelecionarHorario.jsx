@@ -1,9 +1,19 @@
-function SelecionarHorario({ children }) {
+import { useState } from "react";
+
+function SelecionarHorario({ children, selectedHorario, onSelect }) {
+  const isSelected = selectedHorario === children;
+
   return (
-    <div className="bg-white text-black text-center p-1">
-      <input className="h-5 w-5 mr-2" type="checkbox"></input>
-      <label>{children}</label>
-    </div>
+    <button
+      className={`text-black text-center p-1 ${
+        isSelected ? "bg-green-300" : "bg-white"
+      }`}
+      onClick={() => {
+        onSelect(children);
+      }}
+    >
+      {children}
+    </button>
   );
 }
 
