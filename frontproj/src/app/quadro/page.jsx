@@ -30,19 +30,16 @@ function Quadro() {
       return;
     }
 
-    if (bola) {
-      valor += 5;
-    }
+    if (bola) valor += 5;
+    if (rede) valor += 5;
+    if (coletes) valor += 5;
 
-    if (rede) {
-      valor += 5;
-    }
+    var dataurl = data;
+    var horario = selectedHorario;
 
-    if (coletes) {
-      valor += 5;
-    }
-
-    router.push("/solicitarReserva");
+    router.push(
+      `/solicitarReserva?valor=${valor}&horario=${horario}&data=${data}&bola=${bola}&rede=${rede}&coletes=${coletes}`
+    );
   };
 
   const handleSelectHorario = (horario) => {
@@ -96,12 +93,13 @@ function Quadro() {
               ></input>
               <label>Rede </label>
             </div>
-            <div
-              className="space-x-2 flex flex-row items-center"
-              checked={coletes}
-              onChange={() => setColetes(!coletes)}
-            >
-              <input type="checkbox" className="h-5 w-5"></input>
+            <div className="space-x-2 flex flex-row items-center">
+              <input
+                type="checkbox"
+                className="h-5 w-5"
+                checked={coletes}
+                onChange={() => setColetes(!coletes)}
+              ></input>
               <label>Coletes </label>
             </div>
           </div>
