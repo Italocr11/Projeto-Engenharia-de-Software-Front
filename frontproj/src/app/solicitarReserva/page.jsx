@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import Interface from "../../components/Interface";
 import FundoFormulariosInt from "../../components/FundoFormulariosInt";
 import Titulo from "../../components/Titulo";
-import BotaoEnviarInt from "../../components/BotaoEnviarInt";
 import InfoReserv from "../../components/InfoReserv";
 
 export default function () {
   const router = useRouter();
-  var enviar = "/pagamento";
+
+  const confirmar = async (e) => {};
   return (
     <Interface>
       <FundoFormulariosInt>
@@ -26,7 +26,17 @@ export default function () {
         </label>
         <h2 className="text-center font-bold mt-5 mb-2">Informações</h2>
         <InfoReserv></InfoReserv>
-        <BotaoEnviarInt enviar={enviar}></BotaoEnviarInt>
+        <form onSubmit={confirmar}>
+          <button
+            type="submit"
+            className="bg-blue-600 p-2 text-white rounded hover:text-gray-300 mt-5"
+            onClick={() => {
+              router.push("/pagamento");
+            }}
+          >
+            Confirmar
+          </button>
+        </form>
       </FundoFormulariosInt>
     </Interface>
   );
