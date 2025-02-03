@@ -65,7 +65,7 @@ function AlterarSenha() {
         <form onSubmit={confirmar}>
           <button
             type="submit"
-            className="bg-blue-600 p-2 text-white rounded hover:text-gray-300 mt-5"
+            className="bg-blue-600 py-2 px-4 text-white rounded hover:text-gray-300 mt-5"
           >
             Confirmar
           </button>

@@ -1,6 +1,5 @@
 "use client";
 import Interface from "../../components/Interface";
-import Titulo from "../../components/Titulo";
 import SelecionarHorario from "../../components/SelecionarHorario";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -61,6 +60,7 @@ function Quadro() {
             Selecionar data
           </h1>
           <input
+            className="border rouned px-3 py-2"
             type="date"
             id="dateInput"
             onChange={(e) => {
@@ -106,7 +106,7 @@ function Quadro() {
           <form onSubmit={solicitar}>
             <button
               type="submit"
-              className="bg-green-500 p-2 rounded hover:text-gray-800 text-white mt-8"
+              className="bg-green-500 py-2 px-4 rounded hover:text-gray-800 text-white mt-8"
             >
               Solicitar
             </button>
