@@ -36,7 +36,7 @@ export default function Pagamento() {
       setQrCode(resultado.data.qrCode);
       setMsg("");
       router.push("/pagamento/realizado");
-    } catch (erro) {
+    } catch (error) {
       setMsg(
         erro.response?.data?.message ||
           "Erro ao realizar pagamento. Tente novamente."
