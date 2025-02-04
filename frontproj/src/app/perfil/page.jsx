@@ -14,9 +14,9 @@ function Perfil() {
   return (
     <Interface>
       <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center bg-blue-200 w-1/2">
+        <div className="flex flex-col items-center justify-center bg-blue-200 w-1/2 rounded-md">
           <User size={80} className="mt-6 mb-5"></User>
-          <button className="mb-5 bg-blue-600 p-2 rounded text-gray-800 hover:text-white ">
+          <button className="mb-5 bg-blue-600 p-2 rounded-md text-gray-800 hover:text-white ">
             Alterar foto
           </button>
           <div className="flex flex-col items-start">
@@ -24,7 +24,7 @@ function Perfil() {
               <p>Nome:</p>
               <p>{nome}</p>
               <button
-                className="bg-yellow-400 p-2 rounded text-gray-800 hover:text-white"
+                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
                 onClick={() => {
                   router.push("/alterarNome");
                 }}
@@ -36,7 +36,7 @@ function Perfil() {
               <p>Telefone:</p>
               <p>{tel}</p>
               <button
-                className="bg-yellow-400 p-2 rounded text-gray-800 hover:text-white"
+                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
                 onClick={() => {
                   router.push("/alterarTelefone");
                 }}
@@ -51,13 +51,13 @@ function Perfil() {
                 onClick={() => {
                   router.push("/alterarEmail");
                 }}
-                className="bg-yellow-400 p-2 rounded text-gray-800 hover:text-white"
+                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
               >
                 Solicitar alteração
               </button>
             </div>
           </div>
-          <div className="mt-10 bg-yellow-600 p-2 rounded-md mb-8">
+          <div className="mt-10 bg-yellow-600 py-2 px-4 rounded-md mb-8">
             <button
               onClick={() => {
                 router.push("/alterarSenha");

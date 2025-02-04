@@ -1,7 +1,7 @@
 function FundoFormulariosInt({ children }) {
   return (
     <div className="h-full w-full flex items-center justify-center">
-      <div className="flex flex-col items-center h-4/5 w-3/5 justify-center bg-yellow-400 ">
+      <div className="flex flex-col items-center h-4/5 w-3/5 justify-center bg-yellow-300 rounded-md">
         {children}
       </div>
     </div>

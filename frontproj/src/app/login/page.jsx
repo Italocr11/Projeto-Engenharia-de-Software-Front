@@ -66,7 +66,7 @@ function Login() {
           onClick={() => {
             router.push("/");
           }}
-          className=" bg-blue-400 p-2 rounded hover:text-gray-800"
+          className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
         >
           Ir para Cadastro
         </button>
@@ -77,7 +77,7 @@ function Login() {
           <div className=" text-black space-x-10 flex justify-center items-center mb-10 mt-10 ">
             <button
               type="submit"
-              className="bg-blue-600 p-2 rounded hover:text-gray-800"
+              className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800"
             >
               {textProx}
             </button>

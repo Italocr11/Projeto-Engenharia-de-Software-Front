@@ -62,7 +62,7 @@ function AlterarEmail() {
         <form onSubmit={confirmar}>
           <button
             type="submit"
-            className="bg-blue-600 p-2 rounded hover:text-gray-800 mt-10"
+            className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800 mt-10"
           >
             Confirmar
           </button>

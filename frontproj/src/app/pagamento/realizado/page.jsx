@@ -1,9 +1,8 @@
 "use client";
 
-import Interface from "../../../../components/Interface";
-import FundoFormulariosInt from "../../../../components/FundoFormulariosInt";
-import Titulo from "../../../../components/Titulo";
-import BotaoEnviarInt from "../../../../components/BotaoEnviarInt";
+import Interface from "../../../components/Interface";
+import FundoFormulariosInt from "../../../components/FundoFormulariosInt";
+import Titulo from "../../../components/Titulo";
 import { useRouter } from "next/navigation";
 
 export default function () {

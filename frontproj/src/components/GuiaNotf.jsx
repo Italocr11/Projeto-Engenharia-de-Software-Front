@@ -14,7 +14,19 @@ function GuiaNotf() {
         <button className="bg-blue-200 rounded-sm p-1 w-full mb-2">
           <div className="flex flex-row space-x-3">
             <X></X>
+            <p>Reserva cancelada: 18:00 26/10</p>
+          </div>
+        </button>
+        <button className="bg-blue-200 rounded-sm p-1 w-full mb-2">
+          <div className="flex flex-row space-x-3">
+            <Check></Check>
             <p>Reserva solicitada: 18:00 26/10</p>
+          </div>
+        </button>
+        <button className="bg-blue-200 rounded-sm p-1 w-full mb-2">
+          <div className="flex flex-row space-x-3">
+            <X></X>
+            <p>Reserva cancelada: 18:00 26/10</p>
           </div>
         </button>
       </div>
