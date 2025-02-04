@@ -32,7 +32,6 @@ export default function solicitarReserva() {
 
   const [esporte, setEsporte] = useState("Futsal");
 
-  const confirmar = async (e) => {};
   return (
     <Interface>
       <FundoFormulariosInt>
@@ -56,17 +55,15 @@ export default function solicitarReserva() {
         <h2 className="text-center font-bold mt-5 mb-2">Informações</h2>
         <InfoReserv {...reservaInfo}></InfoReserv>
 
-        <form onSubmit={confirmar}>
-          <button
-            type="submit"
-            className="bg-blue-600 py-2 px-4 text-white rounded hover:text-gray-300 mt-5"
-            onClick={() => {
-              router.push("/pagamento");
-            }}
-          >
-            Confirmar
-          </button>
-        </form>
+        <button
+          type="button"
+          className="bg-blue-600 py-2 px-4 text-white rounded hover:text-gray-300 mt-5"
+          onClick={() => {
+            router.push("/pagamento");
+          }}
+        >
+          Confirmar
+        </button>
       </FundoFormulariosInt>
     </Interface>
   );
