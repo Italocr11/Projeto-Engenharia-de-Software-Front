@@ -38,11 +38,11 @@ export default function solicitarReserva() {
     <Interface>
       <FundoFormulariosInt>
         <Titulo>Solicitar reserva</Titulo>
-        <label className="flex space-x-2 items-center mt-10 mb-5">
-          <span>Selecionar esporte:</span>
+        <div className="flex flex-row space-x-2 items-center justify-center m-6">
+          <h3>Selecionar esporte:</h3>
           <select
-            id="Esporte"
-            className="rounded-sm"
+            className="appearance-none bg-gray-100 border-2 border-gray-300 rounded-lg p-1 text-base max-w-xs focus:border-blue-500
+             focus:bg-blue-50 transition-colors duration-300 text-center"
             onChange={(e) => {
               setEsporte(e.target.value);
             }}
@@ -53,7 +53,7 @@ export default function solicitarReserva() {
             <option value="Handebol">Handebol</option>
             <option value="Outro">Outro</option>
           </select>
-        </label>
+        </div>
         <h2 className="text-center font-bold mt-5 mb-2">Informações</h2>
         <InfoReserv {...reservaInfo}></InfoReserv>
 
