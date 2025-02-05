@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 export default function solicitarReserva() {
   const router = useRouter();
   const [reservaInfo, setReservaInfo] = useState({
+    esporte: null,
     valor: null,
     horario: null,
     data: null,
@@ -21,6 +22,7 @@ export default function solicitarReserva() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     setReservaInfo({
+      esporte: urlParams.get("esporte"),
       valor: urlParams.get("valor"),
       horario: urlParams.get("horario"),
       data: urlParams.get("data"),

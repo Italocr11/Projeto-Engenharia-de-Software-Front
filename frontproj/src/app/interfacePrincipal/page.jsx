@@ -28,7 +28,7 @@ export default function InterfacePrincipal() {
           </div>
           {/*reservas.map((reserva) => (
             <InfoReservInterf
-              key={reserva.numero}
+              key={reserva.esporte}
               reserva={reserva}
             ></InfoReservInterf>
           ))*/}
