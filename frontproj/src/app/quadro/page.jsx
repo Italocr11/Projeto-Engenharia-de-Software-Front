@@ -53,7 +53,7 @@ function Quadro() {
 
   return (
     <Interface>
-      <h1 className="text-center font-bold text-4xl pb-5">Quadro de horário</h1>
+      <h1 className="text-center font-bold text-4xl pb-6">Quadro de horário</h1>
       <div className="flex flex-row h-5/6 space-x-10">
         <div className="flex flex-col items-center justify-start bg-yellow-300 w-2/6 rounded-md">
           <h1 className="text-center font-bold text-2xl mb-5 mt-8">

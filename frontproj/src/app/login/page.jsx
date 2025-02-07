@@ -16,11 +16,6 @@ function Login() {
 
   const router = useRouter();
 
-  var textAnt = "Cadastrar";
-  var navAnt = "/";
-  var textProx = "Login";
-  var navProx = "/interfacePrincipal";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +74,7 @@ function Login() {
               type="submit"
               className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800"
             >
-              {textProx}
+              Login
             </button>
           </div>
         </form>
@@ -88,7 +83,7 @@ function Login() {
           <ArrowRight />
           <button
             onClick={() => {
-              router.push("/recuperarSenha");
+              router.push("/recuperarsenha");
             }}
             className="m-1"
           >
