@@ -61,8 +61,8 @@ function Quadro() {
           </h1>
           <input
             className="border rouned px-3 py-2"
-            type="date"
             id="dateInput"
+            type="date"
             onChange={(e) => {
               setData(e.target.value);
             }}

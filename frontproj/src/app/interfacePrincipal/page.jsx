@@ -7,7 +7,7 @@ import useSWR from "swr";
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function InterfacePrincipal() {
-  /*const { data: reservas, error } = useSWRexitapi/reservas", fetcher);
+  /*const { data: reservas, error } = useSWR("/exitapi/reservas", fetcher);
 
   if (error) {
     return <div>Erro ao carregar as reservas!</div>;
@@ -26,9 +26,9 @@ export default function InterfacePrincipal() {
               Horários reservados recentemente
             </h1>
           </div>
-          {/*reservas.map((reserva) => (
+          {/*reservas && Array.isArray(reservas) && reservas.map((reserva) => (
             <InfoReservInterf
-              key={reserva.numero}
+              key={reserva.id}
               reserva={reserva}
             ></InfoReservInterf>
           ))*/}
