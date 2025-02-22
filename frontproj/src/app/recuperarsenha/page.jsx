@@ -29,13 +29,13 @@ export default function RecuperarSenha() {
         "http://localhost:3000/usuarios/recuperarsenha",
         email
       );
+      setCampoCodigo(true);
     } catch (error) {
       setMsg(
         error.resposta?.data?.message ||
           "Erro ao comprovar email. tente novamente."
       );
     }
-    setCampoCodigo(true);
   };
 
   const confirmar = async (e) => {
@@ -61,25 +61,30 @@ export default function RecuperarSenha() {
 
   return (
     <FundoFormularios>
-      <div className="flex flex-col items-center text-black justify-center">
-        <button
-          onClick={() => {
-            router.push("/login");
-          }}
-          className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800 mt-5"
-        >
-          Ir para Login
-        </button>
+      <div className="flex flex-col items-center text-black justify-center mt-5 mb-5">
         <Titulo>Recuperar senha</Titulo>
         {campoCodigo === false && (
           <div className="flex flex-col items-center">
             <form onSubmit={enviar}>
               <div className="flex flex-col items-center">
                 <Email email={email} setEmail={setEmail}></Email>
-
-                <button className="px-4 py-2 bg-green-500 my-5 rounded hover:text-gray-800">
-                  Enviar
-                </button>
+                <div className="flex-row space-x-2 mt-3 mb-3">
+                  <button
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                    type="button"
+                    className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800 mt-5"
+                  >
+                    Ir para Login
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-green-500 my-5 rounded hover:text-gray-800"
+                  >
+                    Enviar
+                  </button>
+                </div>
               </div>
             </form>
             {msg && <div className="text-red-800 mb-5">{msg}</div>}
@@ -101,14 +106,15 @@ export default function RecuperarSenha() {
                 ></input>
                 <div className="flex flex-row space-x-14">
                   <button
-                    className="px-4 py-2 bg-red-500 my-5 rounded hover:text-gray-800"
-                    onClick={() => {
-                      setCampoCodigo(false);
-                    }}
+                    type="button"
+                    className="px-4 py-2 bg-red-400 my-5 rounded hover:text-gray-800"
                   >
                     Reenviar código
                   </button>
-                  <button className="px-4 py-2 bg-green-500 my-5 rounded hover:text-gray-800">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-green-500 my-5 rounded hover:text-gray-800"
+                  >
                     Enviar
                   </button>
                 </div>

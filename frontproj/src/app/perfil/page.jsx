@@ -13,18 +13,16 @@ function Perfil() {
 
   return (
     <Interface>
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center bg-blue-200 w-1/2 rounded-md">
-          <User size={80} className="mt-6 mb-5"></User>
-          <button className="mb-5 bg-blue-600 p-2 rounded-md text-gray-800 hover:text-white ">
-            Alterar foto
-          </button>
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center border-2 border-black w-1/2 rounded-md shadow-2xl">
+          <User size={80} className="my-8"></User>
+
           <div className="flex flex-col items-start">
             <div className="flex flex-row space-x-3 mt-5 mb-10 justify-center items-center">
               <p>Nome:</p>
-              <p>{nome}</p>
+              <p className="text-purple-900">{nome}</p>
               <button
-                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
+                className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
                 onClick={() => {
                   router.push("/alterarNome");
                 }}
@@ -34,9 +32,9 @@ function Perfil() {
             </div>
             <div className="flex flex-row space-x-3 mb-10 items-center justify-center">
               <p>Telefone:</p>
-              <p>{tel}</p>
+              <p className="text-purple-900">{tel}</p>
               <button
-                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
+                className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
                 onClick={() => {
                   router.push("/alterarTelefone");
                 }}
@@ -46,18 +44,18 @@ function Perfil() {
             </div>
             <div className="flex flex-row space-x-3 items-center justify-center">
               <p>Email:</p>
-              <p>{email}</p>
+              <p className="text-purple-900">{email}</p>
               <button
                 onClick={() => {
                   router.push("/alterarEmail");
                 }}
-                className="bg-yellow-400 py-2 px-4 rounded-md text-gray-800 hover:text-white"
+                className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
               >
                 Solicitar alteração
               </button>
             </div>
           </div>
-          <div className="mt-10 bg-yellow-600 py-2 px-4 rounded-md mb-8">
+          <div className="mt-10 bg-green-500 py-2 px-2 rounded-md mb-8 hover:text-white">
             <button
               onClick={() => {
                 router.push("/alterarSenha");

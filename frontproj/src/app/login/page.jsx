@@ -19,13 +19,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (senha.trim() === "") {
-      setMsg("Insira uma senha!");
-      return;
-    }
-
-    if (email.trim() === "") {
-      setMsg("Insira um email!");
+    if (senha.trim() === "" || email.trim() === "") {
+      setMsg("Preencha os campos!");
       return;
     }
 
@@ -56,30 +51,32 @@ function Login() {
 
   return (
     <FundoFormularios>
-      <div className="flex flex-col items-center justify-center text-black mt-10">
-        <button
-          onClick={() => {
-            router.push("/");
-          }}
-          className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
-        >
-          Ir para Cadastro
-        </button>
+      <div className="flex flex-col items-center justify-center text-black mt-5">
         <Titulo>Login</Titulo>
+
         <form onSubmit={handleSubmit}>
           <Email setEmail={setEmail} email={email}></Email>
           <Senha setSenha={setSenha} senha={senha}></Senha>
           <div className=" text-black space-x-10 flex justify-center items-center mb-10 mt-10 ">
             <button
+              onClick={() => {
+                router.push("/");
+              }}
+              type="button"
+              className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
+            >
+              Ir para Cadastro
+            </button>
+            <button
               type="submit"
-              className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800"
+              className="bg-green-500 py-2 px-4 rounded hover:text-gray-800"
             >
               Login
             </button>
           </div>
         </form>
         {msg && <div className="text-red-800 mb-5">{msg}</div>}
-        <div className="text-red-700 flex items-center mb-10">
+        <div className="text-amber-800 flex items-center mb-10">
           <ArrowRight />
           <button
             onClick={() => {

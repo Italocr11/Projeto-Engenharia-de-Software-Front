@@ -78,31 +78,37 @@ function AlterarTelefone() {
       <FundoFormulariosInt>
         <Titulo>Alterar Telefone</Titulo>
         <div className="flex flex-col">
-          <p className=" pt-5">Telefone:</p>
-          <input
-            type="tel"
-            placeholder="(XX) XXXXX-XXXX"
-            maxLength="15"
-            className={`border rounded px-3 py-2 w-full mt-1 ${
-              erroTel ? "border-red-500" : "border-gray-300"
-            }`}
-            value={tel}
-            onChange={handleChangeTelefone}
-            pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
-          ></input>
-          {erroTel && (
-            <div className="text-red-500 text-sm mt-2">{erroTel}</div>
-          )}
           <form onSubmit={confirmar}>
-            <button
-              type="submit"
-              className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800 mt-10"
-              disabled={tel === "" || erroTel !== ""}
-            >
-              Confirmar
-            </button>
+            <div className="text-center">
+              <p className=" mt-5 ">Telefone:</p>
+            </div>
+            <div className="text-center">
+              <input
+                type="tel"
+                placeholder="(XX) XXXXX-XXXX"
+                maxLength="15"
+                className={`border rounded px-3 py-2 mt-1 ${
+                  erroTel ? "border-red-500" : "border-gray-300"
+                }`}
+                value={tel}
+                onChange={handleChangeTelefone}
+                pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+              ></input>
+            </div>
+            {erroTel && (
+              <div className="text-red-500 text-sm mt-2">{erroTel}</div>
+            )}
+            <div className="flex flex-col items-center">
+              <button
+                type="submit"
+                className="bg-green-400 py-2 px-4 rounded hover:text-gray-800 my-5"
+                disabled={tel === "" || erroTel !== ""}
+              >
+                Confirmar
+              </button>
+            </div>
+            {msg && <div className="text-red-800 mb-5">{msg}</div>}
           </form>
-          {msg && <div className="text-red-800 mt-5 pb-10">{msg}</div>}
         </div>
       </FundoFormulariosInt>
     </Interface>

@@ -10,16 +10,18 @@ export default function () {
   return (
     <Interface>
       <FundoFormulariosInt>
-        <Titulo>Pagamento realizado com sucesso!</Titulo>
-        <button
-          onClick={() => {
-            router.push("/interfacePrincipal");
-          }}
-          type="submit"
-          className="bg-blue-600 p-2 rounded hover:text-gray-800 mt-10"
-        >
-          Voltar para interface
-        </button>
+        <div className="my-5 flex flex-col items-center">
+          <Titulo>Seu pagamento foi realizado com sucesso!</Titulo>
+          <button
+            onClick={() => {
+              router.push("/interfacePrincipal");
+            }}
+            type="submit"
+            className="bg-blue-400 p-2 rounded hover:text-gray-800 mt-10"
+          >
+            Voltar para interface
+          </button>
+        </div>
       </FundoFormulariosInt>
     </Interface>
   );

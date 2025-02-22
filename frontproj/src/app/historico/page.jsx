@@ -28,7 +28,7 @@ export default function Historico() {
   return (
     <Interface>
       <div className="h-max w-full flex items-center justify-center">
-        <div className="flex flex-col space-y-3 bg-gray-200 w-full pb-6">
+        <div className="flex flex-col space-y-3 bg-gray-200 w-3/5 pb-6">
           <h1 className="text-center font-bold pb-10 text-3xl mt-10 bold text-yellow-800 ">
             Histórico de horários
           </h1>
@@ -75,6 +75,7 @@ export default function Historico() {
               </select>
             </div>
           </div>
+
           {/*historico && Array.isArray(historico) ? (
             historico.map((historicoReservas) => (
               <InfoReservHist

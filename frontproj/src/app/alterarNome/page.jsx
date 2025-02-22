@@ -54,25 +54,27 @@ function AlterarNome() {
       <FundoFormulariosInt>
         <Titulo>Alterar Nome</Titulo>
         <div className="flex flex-col">
-          <p className=" pt-10">Nome:</p>
-          <input
-            type="text"
-            placeholder="Inserir nome"
-            maxLength="30"
-            className="border rounded px-3 py-2 w-full mt-1"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          ></input>
           <form onSubmit={confirmar}>
-            <button
-              type="submit"
-              className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800 mt-10"
-              disabled={nome === ""}
-            >
-              Confirmar
-            </button>
+            <p className=" pt-10">Nome:</p>
+            <input
+              type="text"
+              placeholder="Inserir nome"
+              maxLength="30"
+              className="border rounded px-3 py-2 w-full mt-1"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            ></input>
+            <div className="flex flex-col items-center mb-5">
+              <button
+                type="submit"
+                className="bg-green-400 py-2 px-4 rounded hover:text-gray-800 my-5"
+                disabled={nome === ""}
+              >
+                Confirmar
+              </button>
+            </div>
           </form>
-          {msg && <div className="text-red-800 mt-5 pb-10">{msg}</div>}
+          {msg && <div className="text-red-800 mb-5">{msg}</div>}
         </div>
       </FundoFormulariosInt>
     </Interface>

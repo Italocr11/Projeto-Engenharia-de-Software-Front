@@ -73,7 +73,7 @@ export default function Pagamento() {
     <Interface>
       <FundoFormulariosInt>
         {tipoPagamento === "" && (
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center my-5">
             <Titulo>Escolher opção de pagamento:</Titulo>
             <div className="flex flex-row space-x-10 mt-5 ">
               <button
@@ -105,7 +105,7 @@ export default function Pagamento() {
         )}
         {tipoPagamento === "pix" && (
           <form onSubmit={confirmarpix}>
-            <div className="space-y-5 flex flex-col items-center justify-center">
+            <div className="space-y-5 flex flex-col items-center justify-center my-5">
               <h1 className="mt-3 text-blue-400 text-2xl font-bold space-y-3 mb-2">
                 Pagamento por Pix
               </h1>
@@ -159,7 +159,7 @@ export default function Pagamento() {
         )}
         {tipoPagamento === "cartão" && (
           <form onSubmit={confirmarcartao}>
-            <div className="space-y-5 flex flex-col items-center justify-center">
+            <div className="space-y-5 flex flex-col items-center justify-center my-5">
               <h1 className="mt-3 text-violet-500 text-2xl font-bold space-y-3">
                 Pagamento por Cartão
               </h1>

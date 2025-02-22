@@ -56,18 +56,24 @@ function AlterarEmail() {
   return (
     <Interface>
       <FundoFormulariosInt>
-        <Titulo>Alterar E-mail</Titulo>
-        <Senha senha={senha} setSenha={setSenha}></Senha>
-        <Email str={str} email={altEmail} setEmail={setaltEmail}></Email>
-        <form onSubmit={confirmar}>
-          <button
-            type="submit"
-            className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800 mt-10"
-          >
-            Confirmar
-          </button>
-        </form>
-        {msg && <div className="text-red-800 mt-5 pb-10">{msg}</div>}
+        <div className="mt-5">
+          <Titulo>Alterar E-mail</Titulo>
+        </div>
+        <div>
+          <form onSubmit={confirmar}>
+            <Senha senha={senha} setSenha={setSenha}></Senha>
+            <Email str={str} email={altEmail} setEmail={setaltEmail}></Email>
+            <div className="flex flex-col items-center">
+              <button
+                type="submit"
+                className="bg-green-400 py-2 px-4 rounded hover:text-gray-800 mt-8 mb-5"
+              >
+                Confirmar
+              </button>
+              {msg && <div className="text-red-800 mt-5 mb-5">{msg}</div>}
+            </div>
+          </form>
+        </div>
       </FundoFormulariosInt>
     </Interface>
   );

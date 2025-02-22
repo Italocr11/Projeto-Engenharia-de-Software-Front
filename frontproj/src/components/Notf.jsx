@@ -15,21 +15,21 @@ export default function Notf() {
   } */
 
   return (
-    <div className="rounded-sm w-full mb-2 space-y-3">
+    <div className="flex flex-col items-centerrounded-sm w-full space-y-2">
       {/*notificacoes && Array.isArray(notificacao) && notificacao.map((notificacao) => (
         <div key={notificacao.id}>
           {notificacao.icone ? (
             <div className="flex flex-row space-x-1 bg-blue-300 p-2">
               <Check />
               <p>
-                Reserva solicitada: {notificacao.horario} {notificacao.data}
+                Reserva solicitada: {notificacao.data} {notificacao.horario}
               </p>
             </div>
           ) : (
             <div className="flex flex-row space-x-1 bg-blue-300 p-2">
               <X />
               <p>
-                Reserva cancelada: {notificacao.horario} {notificacao.data}
+                Reserva cancelada: {notificacao.data} {notificacao.horario}
               </p>
             </div>
           )}
