@@ -61,6 +61,7 @@ function Login() {
               onClick={() => {
                 router.push("/");
               }}
+              type="button"
               className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
             >
               Ir para Cadastro

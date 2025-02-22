@@ -56,14 +56,6 @@ function Login() {
   return (
     <FundoFormularios>
       <div className="flex flex-col items-center justify-center text-black mt-10">
-        <button
-          onClick={() => {
-            router.push("/login");
-          }}
-          className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
-        >
-          Ir para Login
-        </button>
         <Titulo>Nova senha</Titulo>
         <form onSubmit={confirmar}>
           <Senha setSenha={setSenha} senha={senha}></Senha>
@@ -79,6 +71,15 @@ function Login() {
             ></input>
           </div>
           <div className=" text-black space-x-10 flex justify-center items-center mb-10 mt-10 ">
+            <button
+              type="button"
+              onClick={() => {
+                router.push("/login");
+              }}
+              className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
+            >
+              Ir para Login
+            </button>
             <button
               type="submit"
               className="bg-green-500 py-2 px-4 rounded hover:text-gray-700"
