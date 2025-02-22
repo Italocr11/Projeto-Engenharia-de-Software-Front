@@ -19,20 +19,14 @@ function Cadastro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (nome.trim() === "") {
-      return setMsg("O campo nome não está preenchido!");
-    }
-
-    if (email.trim() === "") {
-      return setMsg("O campo email não está preenchido!");
-    }
-
-    if (senha.trim() === "") {
-      return setMsg("O campo senha não está preenchido!");
-    }
-
-    if (telefone.trim() === "") {
-      return setMsg("O campo telefone não está preenchido!");
+    if (
+      nome.trim() === "" ||
+      telefone.trim() === "" ||
+      telefone.trim() === "" ||
+      senha.trim() === "" ||
+      email.trim() === ""
+    ) {
+      return setMsg("Preencha todos os campos!");
     }
 
     if (senha.length < 8) {
@@ -56,14 +50,6 @@ function Cadastro() {
 
   return (
     <div className="flex flex-col text-black items-center justify-center mt-10">
-      <button
-        onClick={() => {
-          router.push("/login");
-        }}
-        className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
-      >
-        Ir para login
-      </button>
       <Titulo>Cadastrar</Titulo>
       <form onSubmit={handleSubmit}>
         <div className="pb-8">
@@ -73,7 +59,7 @@ function Cadastro() {
             type="text"
             placeholder="Inserir nome"
             maxLength="30"
-            className="border rounded px-3 py-2 w-full mt-1"
+            className="border border-gray-800 rounded px-3 py-2 w-full mt-1"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           ></input>
@@ -85,15 +71,23 @@ function Cadastro() {
             type="tel"
             placeholder="(  ) _____-____"
             maxLength="15"
-            className="border rounded px-3 py-2 w-full mt-1"
+            className="border border-gray-800 rounded px-3 py-2 w-full mt-1"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
             pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
           ></input>
-          <div className="flex items-center justify-center mt-5">
+          <div className="flex items-center justify-center mt-10 space-x-10">
+            <button
+              onClick={() => {
+                router.push("/login");
+              }}
+              className=" bg-blue-400 py-2 px-4 rounded hover:text-gray-800"
+            >
+              Ir para login
+            </button>
             <button
               type="submit"
-              className="bg-blue-600 py-2 px-4 rounded hover:text-gray-800"
+              className="bg-green-500 py-2 px-4 rounded hover:text-gray-800"
             >
               Cadastrar
             </button>
