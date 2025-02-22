@@ -5,25 +5,25 @@ import Interface from "../../components/Interface";
 import { useState } from "react";
 import useSWR from "swr";
 
-// const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Historico() {
   const [filtroData, setFiltroData] = useState("");
   const [filtroHorario, setFiltroHorario] = useState(null);
 
-  /*const url = `/exitapi/historico?${filtroData ? `data=${filtroData}` : ""}${
+  const url = `/exitapi/historico?${filtroData ? `data=${filtroData}` : ""}${
     filtroData && filtroHorario ? "&" : ""
   }${filtroHorario ? `horario=${filtroHorario}` : ""}`;
 
   const { data: historico, error } = useSWR(url, fetcher);
 
-  if (error) {
+  /*if (error) {
     return <div>Erro ao carregar histórico!</div>;
   }
 
   if (!historico) {
     return <div>Carregando histórico...</div>;
-  } */
+  }*/
 
   return (
     <Interface>
@@ -76,7 +76,7 @@ export default function Historico() {
             </div>
           </div>
 
-          {/*historico && Array.isArray(historico) ? (
+          {historico && Array.isArray(historico) ? (
             historico.map((historicoReservas) => (
               <InfoReservHist
                 key={historicoReservas.id}
@@ -84,8 +84,10 @@ export default function Historico() {
               />
             ))
           ) : (
-            <div>Nenhum histórico encontrado.</div>
-          )*/}
+            <div className="text-center text-gray-800 font-bold mt-10">
+              Você não alugou nenhuma reserva até o momento!
+            </div>
+          )}
         </div>
       </div>
     </Interface>
