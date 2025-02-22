@@ -5,7 +5,7 @@ function SelecionarHorario({ children, selectedHorario, onSelect }) {
 
   return (
     <button
-      className={`text-black text-center p-1 ${
+      className={`text-black text-center p-2 border-2 border-purple-800 shadow-xl ${
         isSelected ? "bg-green-300" : "bg-white"
       }`}
       onClick={() => {
