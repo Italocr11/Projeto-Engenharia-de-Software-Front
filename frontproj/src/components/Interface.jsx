@@ -17,7 +17,7 @@ export default function Interface({ children }) {
 
   return (
     <div className="bg-white overflow-hidden h-screen" onClick={toggleNotf}>
-      <header className="bg-amber-400 h-20 flex flex-row text-blue-950 font-bold text-lg items-center justify-between">
+      <header className="bg-green-400 h-20 flex flex-row text-blue-950 font-bold text-lg items-center justify-between">
         <button
           onClick={() => {
             router.push("/interfacePrincipal");

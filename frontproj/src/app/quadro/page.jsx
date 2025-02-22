@@ -59,11 +59,13 @@ function Quadro() {
 
       <div className="flex flex-row h-5/6 space-x-10 justify-center">
         <div className="flex flex-col items-center justify-start border-2 border-black shadow-xl w-2/6 rounded-md">
-          <h1 className="text-center font-bold text-2xl mb-5 mt-8">
-            Selecionar data
-          </h1>
+          <div className="bg-black w-full text-white">
+            <h1 className="text-center font-bold text-2xl mb-6 mt-8">
+              Selecionar data
+            </h1>
+          </div>
           <input
-            className="border rouned px-3 py-2"
+            className="border rouned px-3 py-2 mt-5"
             id="dateInput"
             type="date"
             onChange={(e) => {
@@ -117,10 +119,12 @@ function Quadro() {
           {msg && <div className="text-red-800 mt-8 pb-10">{msg}</div>}
         </div>
         <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md overflow-hidden">
-          <h1 className="text-center font-bold text-2xl mb-6 mt-8 ">
-            Selecionar horário
-          </h1>
-          <div className="grid grid-rows-8 items-center justify-center grid-cols-3 gap-8 h-full mr-5 ml-5 mt-5">
+          <div className="bg-black w-full text-white">
+            <h1 className="text-center font-bold text-2xl mb-6 mt-8 ">
+              Selecionar horário
+            </h1>
+          </div>
+          <div className="grid grid-rows-8 items-center justify-center grid-cols-3 gap-8 h-full mr-5 ml-5 mt-10">
             {[
               "8:00",
               "9:00",
