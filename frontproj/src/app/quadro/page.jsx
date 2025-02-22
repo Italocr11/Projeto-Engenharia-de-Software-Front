@@ -118,7 +118,7 @@ function Quadro() {
         </div>
         <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md overflow-hidden">
           <h1 className="text-center font-bold text-2xl mb-6 mt-8 ">
-            Selecionar horários
+            Selecionar horário
           </h1>
           <div className="grid grid-rows-8 items-center justify-center grid-cols-3 gap-8 h-full mr-5 ml-5 mt-5">
             {[
