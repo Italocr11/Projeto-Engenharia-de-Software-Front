@@ -1,7 +1,5 @@
 "use client";
 
-import InfoReserv from "../../components/InfoReserv";
-import { Check } from "lucide-react";
 import InfoReservHist from "../../components/InfoReservHist";
 import Interface from "../../components/Interface";
 import { useState } from "react";
@@ -77,6 +75,7 @@ export default function Historico() {
               </select>
             </div>
           </div>
+
           {/*historico && Array.isArray(historico) ? (
             historico.map((historicoReservas) => (
               <InfoReservHist

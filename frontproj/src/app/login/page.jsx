@@ -51,8 +51,9 @@ function Login() {
 
   return (
     <FundoFormularios>
-      <div className="flex flex-col items-center justify-center text-black mt-10">
+      <div className="flex flex-col items-center justify-center text-black mt-5">
         <Titulo>Login</Titulo>
+
         <form onSubmit={handleSubmit}>
           <Email setEmail={setEmail} email={email}></Email>
           <Senha setSenha={setSenha} senha={senha}></Senha>
