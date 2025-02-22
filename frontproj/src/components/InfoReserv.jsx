@@ -10,7 +10,7 @@ function InfoReserv({ ...reservaInfo }) {
       </div>
       <div className="flex flex-col bg-yellow-200 w-1/2 space-x-2 text-violet-900">
         <h3 className="ml-2 mt-1 mb-5">Equipamentos:</h3>
-        <div className="flex flex-row space-x-4 items-center justify-center">
+        <div className="flex flex-row space-x-3 items-center justify-center">
           <div className="flex flex-col items-center ">
             <label className="">Bola</label>
             {reservaInfo.bola ? <Check size={20}></Check> : <X size={20}></X>}

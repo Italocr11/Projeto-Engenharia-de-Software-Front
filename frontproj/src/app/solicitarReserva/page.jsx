@@ -54,12 +54,12 @@ export default function solicitarReserva() {
             <option value="Outro">Outro</option>
           </select>
         </div>
-        <h2 className="text-center font-bold mt-5 mb-2">Informações</h2>
+        <h2 className="text-center font-bold mt-5 mb-2">Informações:</h2>
         <InfoReserv {...reservaInfo}></InfoReserv>
 
         <button
           type="button"
-          className="bg-blue-600 py-2 px-4 text-white rounded hover:text-gray-300 mt-5"
+          className="bg-green-400 py-2 px-4 text-black rounded hover:text-gray-300 my-5"
           onClick={() => {
             router.push("/pagamento");
           }}
