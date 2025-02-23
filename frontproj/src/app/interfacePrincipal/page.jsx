@@ -4,12 +4,12 @@ import Interface from "../../components/Interface";
 import InfoReservInterf from "../../components/InfoReservInterf";
 import useSWR from "swr";
 
-// const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function InterfacePrincipal() {
-  /*const { data: reservas, error } = useSWR("/exitapi/reservas", fetcher);
+  const { data: reservas, error } = useSWR("/exitapi/reservas", fetcher);
 
-  if (error) {
+  /*if (error) {
     return <div>Erro ao carregar as reservas!</div>;
   }
 
@@ -27,12 +27,15 @@ export default function InterfacePrincipal() {
             </h1>
           </div>
 
-          {/*reservas && Array.isArray(reservas) && reservas.map((reserva) => (
-            <InfoReservInterf
-              key={reserva.id}
-              reserva={reserva}
-            ></InfoReservInterf>
-          ))*/}
+          {reservas && Array.isArray(reservas) && reservas.length > 0 ? (
+            reservas.map((reserva) => (
+              <InfoReservInterf key={reserva.id} reserva={reserva} />
+            ))
+          ) : (
+            <div className="text-center text-gray-800 font-bold mt-10">
+              Você não possui nenhuma reserva alugada!
+            </div>
+          )}
         </div>
       </div>
     </Interface>

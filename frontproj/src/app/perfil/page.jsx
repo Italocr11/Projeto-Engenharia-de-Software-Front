@@ -1,8 +1,8 @@
 "use client";
 import Interface from "@/components/Interface";
-import InterfacePrincipal from "../interfacePrincipal/page";
 import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 function Perfil() {
   const router = useRouter();
@@ -11,21 +11,33 @@ function Perfil() {
   var tel = localStorage.getItem("userTel");
   var nome = localStorage.getItem("userNome");
 
+  /*useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    if (!userEmail) {
+      router.replace("/login"); // Redireciona se o usuário não estiver logado
+    }
+  }, []);*/
+
   return (
     <Interface>
       <div className="flex flex-col items-center justify-center h-full">
-        <div className="flex flex-col items-center justify-center border-2 border-black w-1/2 rounded-md shadow-2xl">
-          <User size={80} className="my-8"></User>
-
+        <div className="flex flex-col items-center justify-center border-4 border-gray-800 w-1/2 rounded-md shadow-2xl">
+          <div className="flex flex-col items-center w-full bg-amber-300">
+            <img
+              className="my-6"
+              src="/img/fotoperfil.png"
+              alt="perfil"
+              width={90}
+              height={50}
+            ></img>
+          </div>
           <div className="flex flex-col items-start">
             <div className="flex flex-row space-x-3 mt-5 mb-10 justify-center items-center">
               <p>Nome:</p>
               <p className="text-purple-900">{nome}</p>
               <button
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
-                onClick={() => {
-                  router.push("/alterarNome");
-                }}
+                onClick={() => router.push("/alterarNome")}
               >
                 Alterar
               </button>
@@ -35,9 +47,7 @@ function Perfil() {
               <p className="text-purple-900">{tel}</p>
               <button
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
-                onClick={() => {
-                  router.push("/alterarTelefone");
-                }}
+                onClick={() => router.push("/alterarTelefone")}
               >
                 Alterar
               </button>
@@ -46,22 +56,36 @@ function Perfil() {
               <p>Email:</p>
               <p className="text-purple-900">{email}</p>
               <button
-                onClick={() => {
-                  router.push("/alterarEmail");
-                }}
+                onClick={() => router.push("/alterarEmail")}
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
               >
                 Solicitar alteração
               </button>
             </div>
           </div>
-          <div className="mt-10 bg-green-500 py-2 px-2 rounded-md mb-8 hover:text-white">
+          <div className="flex flex-row my-10 space-x-5">
             <button
-              onClick={() => {
-                router.push("/alterarSenha");
-              }}
+              className="bg-green-500 py-2 px-2 rounded-md hover:text-white"
+              onClick={() => router.push("/alterarSenha")}
             >
               Solicitar mudança de senha
+            </button>
+            <button
+              className="bg-red-500 py-2 px-2 rounded-md hover:text-white"
+              onClick={() => {
+                localStorage.removeItem("userEmail");
+                localStorage.removeItem("userNome");
+                localStorage.removeItem("userTel");
+
+                window.history.pushState(null, "", window.location.href);
+                window.onpopstate = function () {
+                  window.history.pushState(null, "", window.location.href);
+                };
+
+                router.replace("/login");
+              }}
+            >
+              Encerrar Sessão
             </button>
           </div>
         </div>

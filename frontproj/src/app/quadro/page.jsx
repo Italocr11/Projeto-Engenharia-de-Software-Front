@@ -1,8 +1,10 @@
 "use client";
+
 import Interface from "../../components/Interface";
 import SelecionarHorario from "../../components/SelecionarHorario";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 function Quadro() {
   const [bola, setBola] = useState(false);
@@ -11,44 +13,60 @@ function Quadro() {
   const [msg, setMsg] = useState("");
   const [selectedHorario, setSelectedHorario] = useState(null);
   const [data, setData] = useState("");
+  const [horariosOcupados, setHorariosOcupados] = useState([]);
 
   const router = useRouter();
+  const dateInputRef = useRef(null);
+  const baseValor = 40;
 
-  var valor = 40;
+  useEffect(() => {
+    if (data) {
+      axios
+        .get(`http://localhost:3000/reserva/quadro?data=${data}`)
+        .then((response) => {
+          setHorariosOcupados(response.data);
+        })
+        .catch((error) => {
+          setMsg(
+            error.response?.data?.message ||
+              "Erro ao buscar horários. Tente novamente!"
+          );
+        });
+    }
+  }, [data]);
 
-  const solicitar = async (e) => {
+  const solicitar = (e) => {
     e.preventDefault();
 
-    if (data === "") {
+    if (!data) {
       setMsg("Selecione uma data!");
       return;
     }
 
-    if (selectedHorario === null) {
+    if (!selectedHorario) {
       setMsg("Selecione um horário!");
       return;
     }
 
-    if (bola) valor += 5;
-    if (rede) valor += 5;
-    if (coletes) valor += 5;
-
-    var dataurl = data;
-    var horario = selectedHorario;
+    const valorFinal =
+      baseValor + (bola ? 5 : 0) + (rede ? 5 : 0) + (coletes ? 5 : 0);
 
     router.push(
-      `/solicitarReserva?valor=${valor}&horario=${horario}&data=${data}&bola=${bola}&rede=${rede}&coletes=${coletes}`
+      `/solicitarReserva?valor=${valorFinal}&horario=${selectedHorario}&data=${data}&bola=${bola}&rede=${rede}&coletes=${coletes}`
     );
   };
 
   const handleSelectHorario = (horario) => {
-    setSelectedHorario(horario);
+    if (!horariosOcupados.includes(horario)) {
+      setSelectedHorario((prev) => (prev === horario ? null : horario));
+    }
   };
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0]; // Formata a data no formato YYYY-MM-DD
-    document.getElementById("dateInput").setAttribute("min", formattedDate);
+    const today = new Date().toISOString().split("T")[0];
+    if (dateInputRef.current) {
+      dateInputRef.current.min = today;
+    }
   }, []);
 
   return (
@@ -58,73 +76,68 @@ function Quadro() {
       </h1>
 
       <div className="flex flex-row h-5/6 space-x-10 justify-center">
-        <div className="flex flex-col items-center justify-start border-2 border-black shadow-xl w-2/6 rounded-md">
+        <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md">
           <div className="bg-black w-full text-white">
             <h1 className="text-center font-bold text-2xl mb-6 mt-8">
               Selecionar data
             </h1>
           </div>
           <input
-            className="border rouned px-3 py-2 mt-5"
-            id="dateInput"
+            ref={dateInputRef}
+            className="border rounded px-3 py-2 mt-5"
             type="date"
-            onChange={(e) => {
-              setData(e.target.value);
-            }}
-          ></input>
+            onChange={(e) => setData(e.target.value)}
+          />
 
-          <div className="items-center justify-center space-y-2 text-purple-900">
-            <h3 className="text-center font-bold mt-10 text-black">
-              Equipamentos necessários:
-            </h3>
-
-            <div className="space-x-2 flex flex-row items-center">
+          <div className="text-black mt-10 space-y-1">
+            <h3 className="font-bold mb-2">Equipamentos necessários:</h3>
+            <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 className="h-5 w-5"
                 checked={bola}
-                onChange={() => {
-                  setBola(!bola);
-                }}
-              ></input>
-              <label>Bola </label>
+                onChange={() => setBola(!bola)}
+              />
+              <label>Bola 🏀</label>
             </div>
-            <div className="space-x-2 flex flex-row items-center">
+            <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 className="h-5 w-5"
                 checked={rede}
                 onChange={() => setRede(!rede)}
-              ></input>
-              <label>Rede </label>
+              />
+              <label>Rede 🥅</label>
             </div>
-            <div className="space-x-2 flex flex-row items-center">
+            <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 className="h-5 w-5"
                 checked={coletes}
                 onChange={() => setColetes(!coletes)}
-              ></input>
-              <label>Coletes </label>
+              />
+              <label>Coletes 🎽</label>
             </div>
           </div>
+
           <form onSubmit={solicitar}>
             <button
               type="submit"
-              className="bg-green-500 py-2 px-4 rounded hover:text-gray-800 text-white mt-8"
+              className="bg-green-500 py-2 px-4 rounded text-white mt-8 hover:text-gray-800"
             >
               Solicitar
             </button>
           </form>
           {msg && <div className="text-red-800 mt-8 pb-10">{msg}</div>}
         </div>
+
         <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md overflow-hidden">
           <div className="bg-black w-full text-white">
-            <h1 className="text-center font-bold text-2xl mb-6 mt-8 ">
+            <h1 className="text-center font-bold text-2xl mb-6 mt-8">
               Selecionar horário
             </h1>
           </div>
-          <div className="grid grid-rows-8 items-center justify-center grid-cols-3 gap-8 h-full mr-5 ml-5 mt-10">
+          <div className="grid grid-rows-8 grid-cols-3 gap-8 h-full mx-5 mt-10">
             {[
               "8:00",
               "9:00",
@@ -146,6 +159,7 @@ function Quadro() {
                 key={hora}
                 selectedHorario={selectedHorario}
                 onSelect={handleSelectHorario}
+                disabled={horariosOcupados.includes(hora)}
               >
                 {hora}
               </SelecionarHorario>

@@ -22,13 +22,13 @@ export default function Interface({ children }) {
           onClick={() => {
             router.push("/interfacePrincipal");
           }}
-          className="ml-10 hover:text-black"
+          className="ml-5 hover:text-black"
         >
-          <h1>Horário para quadras</h1>
+          <img src="/img/Logo.png" alt="Logo" height={70} width={70}></img>
         </button>
 
         <button
-          className="flex items-center hover:text-black pt-2"
+          className="flex items-center hover:text-black"
           onClick={() => {
             router.push("./quadro");
           }}
@@ -58,9 +58,15 @@ export default function Interface({ children }) {
           onClick={() => {
             router.push("/perfil");
           }}
-          className="mr-10 hover:text-black"
+          className="mr-5 hover:text-black"
         >
-          <User className="mb-1 ml-3" />
+          <img
+            src="/img/fotoperfil.png"
+            alt="perfil"
+            width={30}
+            height={30}
+            className="ml-2"
+          ></img>
           <span>Perfil</span>
         </button>
       </header>
