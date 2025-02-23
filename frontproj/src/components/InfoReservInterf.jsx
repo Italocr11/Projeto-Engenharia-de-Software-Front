@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { InfoReservInterf2 } from "./InfoReservInterf2";
+import InfoReservInterf2 from "./InfoReservInterf2";
 
 export default function InfoReservInterf({ reserva }) {
   const router = useRouter();
