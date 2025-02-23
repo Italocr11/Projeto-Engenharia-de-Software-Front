@@ -11,19 +11,24 @@ function Perfil() {
   var tel = localStorage.getItem("userTel");
   var nome = localStorage.getItem("userNome");
 
-  useEffect(() => {
+  /*useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
     if (!userEmail) {
       router.replace("/login"); // Redireciona se o usuário não estiver logado
     }
-  }, []);
+  }, []);*/
 
   return (
     <Interface>
       <div className="flex flex-col items-center justify-center h-full">
         <div className="flex flex-col items-center justify-center border-2 border-black w-1/2 rounded-md shadow-2xl">
-          <User size={80} className="my-8" />
-
+          <img
+            className="my-8"
+            src="/img/fotoperfil.png"
+            alt="perfil"
+            width={90}
+            height={50}
+          ></img>
           <div className="flex flex-col items-start">
             <div className="flex flex-row space-x-3 mt-5 mb-10 justify-center items-center">
               <p>Nome:</p>

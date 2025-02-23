@@ -1,8 +1,10 @@
 "use client";
+
 import Interface from "../../components/Interface";
 import SelecionarHorario from "../../components/SelecionarHorario";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Grid, Shirt } from "lucide-react";
 
 function Quadro() {
   const [bola, setBola] = useState(false);
@@ -87,7 +89,7 @@ function Quadro() {
                   setBola(!bola);
                 }}
               ></input>
-              <label>Bola </label>
+              <label>Bola 🏀 </label>
             </div>
             <div className="space-x-2 flex flex-row items-center">
               <input
@@ -96,7 +98,7 @@ function Quadro() {
                 checked={rede}
                 onChange={() => setRede(!rede)}
               ></input>
-              <label>Rede </label>
+              <label>Rede 🥅</label>
             </div>
             <div className="space-x-2 flex flex-row items-center">
               <input
@@ -105,7 +107,7 @@ function Quadro() {
                 checked={coletes}
                 onChange={() => setColetes(!coletes)}
               ></input>
-              <label>Coletes </label>
+              <label>Coletes 🎽</label>
             </div>
           </div>
           <form onSubmit={solicitar}>
