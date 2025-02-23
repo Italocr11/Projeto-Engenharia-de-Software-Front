@@ -61,7 +61,9 @@ export default function solicitarReserva() {
           type="button"
           className="bg-green-400 py-2 px-4 text-black rounded hover:text-gray-300 my-5"
           onClick={() => {
-            router.push("/pagamento");
+            router.push(
+              `/pagamento?esporte=${esporte}&valor=${reservaInfo.valor}&horario=${reservaInfo.horario}&data=${reservaInfo.data}&bola=${reservaInfo.bola}&rede=${reservaInfo.rede}&coletes=${reservaInfo.coletes}`
+            );
           }}
         >
           Confirmar
