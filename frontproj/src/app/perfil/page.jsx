@@ -21,14 +21,16 @@ function Perfil() {
   return (
     <Interface>
       <div className="flex flex-col items-center justify-center h-full">
-        <div className="flex flex-col items-center justify-center border-2 border-black w-1/2 rounded-md shadow-2xl">
-          <img
-            className="my-8"
-            src="/img/fotoperfil.png"
-            alt="perfil"
-            width={90}
-            height={50}
-          ></img>
+        <div className="flex flex-col items-center justify-center border-4 border-gray-800 w-1/2 rounded-md shadow-2xl">
+          <div className="flex flex-col items-center w-full bg-amber-300">
+            <img
+              className="my-6"
+              src="/img/fotoperfil.png"
+              alt="perfil"
+              width={90}
+              height={50}
+            ></img>
+          </div>
           <div className="flex flex-col items-start">
             <div className="flex flex-row space-x-3 mt-5 mb-10 justify-center items-center">
               <p>Nome:</p>

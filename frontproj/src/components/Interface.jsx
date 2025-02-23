@@ -28,7 +28,7 @@ export default function Interface({ children }) {
         </button>
 
         <button
-          className="flex items-center hover:text-black pt-2"
+          className="flex items-center hover:text-black"
           onClick={() => {
             router.push("./quadro");
           }}
