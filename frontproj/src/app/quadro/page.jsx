@@ -21,12 +21,18 @@ function Quadro() {
 
   useEffect(() => {
     if (data) {
+      const [year, month, day] = data.split("-");
+      const formattedDate = `${day}-${month}-${year}`;
+
       axios
-        .get(`http://localhost:3000/reserva/quadro?data=${data}`)
+        .get(`http://localhost:3000/reservas/quadro?data=${formattedDate}`)
+
         .then((response) => {
-          setHorariosOcupados(response.data);
+          setHorariosOcupados(response.data.map((hora) => hora.horario));
+          console.log(horariosOcupados);
         })
         .catch((error) => {
+          console.log(error);
           setMsg(
             error.response?.data?.message ||
               "Erro ao buscar horários. Tente novamente!"

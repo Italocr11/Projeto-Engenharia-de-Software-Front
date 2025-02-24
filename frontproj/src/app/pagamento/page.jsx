@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Interface from "../../components/Interface";
 import FundoFormulariosInt from "../../components/FundoFormulariosInt";
 import Titulo from "../../components/Titulo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Pagamento() {
@@ -21,6 +21,29 @@ export default function Pagamento() {
 
   const router = useRouter();
 
+  const [reservaInfo, setReservaInfo] = useState({
+    esporte: null,
+    valor: null,
+    horario: null,
+    data: null,
+    bola: null,
+    rede: null,
+    coletes: null,
+  });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setReservaInfo({
+      esporte: urlParams.get("esporte"),
+      valor: urlParams.get("valor"),
+      horario: urlParams.get("horario"),
+      data: urlParams.get("data"),
+      bola: urlParams.get("bola") === "true",
+      rede: urlParams.get("rede") === "true",
+      coletes: urlParams.get("coletes") === "true",
+    });
+  }, []);
+
   const confirmarpix = async (e) => {
     e.preventDefault();
 
@@ -33,12 +56,13 @@ export default function Pagamento() {
       const resultado = await axios.post("http://localhost:3000/pagamentopix", {
         chavePix,
       });
+      await axios.post("http://localhost:3000/reserva", { ...reservaInfo });
       setQrCode(resultado.data.qrCode);
       setMsg("");
       router.push("/pagamento/realizado");
     } catch (error) {
       setMsg(
-        erro.response?.data?.message ||
+        error.response?.data?.message ||
           "Erro ao realizar pagamento. Tente novamente."
       );
     }
@@ -52,13 +76,14 @@ export default function Pagamento() {
       return;
     }
 
-    const dados = { nomeCartao, numeroCartao, dataCartao, codigoCartao };
-
     try {
-      const resposta = await axios.post(
-        "http://localhost:3000/pagamentocartao",
-        dados
-      );
+      await axios.post("http://localhost:3000/pagamentocartao", {
+        nomeCartao,
+        numeroCartao,
+        dataCartao,
+        codigoCartao,
+      });
+      await axios.post("http://localhost:3000/reserva", { ...reservaInfo });
       setMsg("");
       router.push("/pagamento/realizado");
     } catch (erro) {
@@ -75,160 +100,79 @@ export default function Pagamento() {
         {tipoPagamento === "" && (
           <div className="flex flex-col items-center justify-center my-5">
             <Titulo>Escolher opção de pagamento:</Titulo>
-            <div className="flex flex-row space-x-10 mt-5 ">
-              <button
-                onClick={() => {
-                  settipoPagamento("pix");
-                }}
-              >
-                <img
-                  src="/img/pix-img.jpg"
-                  alt="pix"
-                  width={105}
-                  height={50}
-                ></img>
+            <div className="flex flex-row space-x-10 mt-5">
+              <button onClick={() => settipoPagamento("pix")}>
+                <img src="/img/pix-img.jpg" alt="pix" width={105} height={50} />
               </button>
-              <button
-                onClick={() => {
-                  settipoPagamento("cartão");
-                }}
-              >
+              <button onClick={() => settipoPagamento("cartão")}>
                 <img
                   src="/img/cartao-img.jpg"
                   alt="cartão"
                   width={70}
                   height={30}
-                ></img>
+                />
               </button>
             </div>
           </div>
         )}
-        {tipoPagamento === "pix" && (
-          <form onSubmit={confirmarpix}>
-            <div className="space-y-5 flex flex-col items-center justify-center my-5">
-              <h1 className="mt-3 text-blue-400 text-2xl font-bold space-y-3 mb-2">
-                Pagamento por Pix
-              </h1>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>Chave pix:</label>
-                <input
-                  value={chavePix}
-                  onChange={(e) => {
-                    setchavePix(e.target.value);
-                  }}
-                  maxLength={30}
-                  className="border rounded px-3 py-2"
-                ></input>
-              </div>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>QR code:</label>
-                <button
-                  className="py-2 px-4 rounded-md bg-blue-400"
-                  type="submit"
-                >
-                  Gerar QR Code
-                </button>
 
-                {qrCode && (
-                  <div className="mt-5">
-                    <img src={qrCode} alt="QR Code Pix" />
-                  </div>
-                )}
-              </div>
-              <div className="flex flex-row items-center space-x-12">
-                <button
-                  type="button"
-                  className="py-2 px-4 rounded-md bg-red-500"
-                  onClick={() => {
-                    settipoPagamento("cartão");
-                    setMsg("");
-                  }}
-                >
-                  Cartão
-                </button>
-                <button
-                  className="py-2 px-4 rounded-md bg-green-500"
-                  type="submit"
-                >
-                  Confirmar
-                </button>
-              </div>
-              {msg && <div className="text-red-800 mt-5">{msg}</div>}
-            </div>
+        {tipoPagamento === "pix" && (
+          <form
+            onSubmit={confirmarpix}
+            className="space-y-5 flex flex-col items-center justify-center my-5"
+          >
+            <Titulo>Pagamento por Pix</Titulo>
+            <input
+              value={chavePix}
+              onChange={(e) => setchavePix(e.target.value)}
+              maxLength={30}
+              placeholder="Chave Pix"
+              className="border rounded px-3 py-2"
+            />
+            <button className="py-2 px-4 rounded-md bg-green-500" type="submit">
+              Confirmar
+            </button>
+            {msg && <div className="text-red-800 mt-5">{msg}</div>}
           </form>
         )}
+
         {tipoPagamento === "cartão" && (
-          <form onSubmit={confirmarcartao}>
-            <div className="space-y-5 flex flex-col items-center justify-center my-5">
-              <h1 className="mt-3 text-violet-500 text-2xl font-bold space-y-3">
-                Pagamento por Cartão
-              </h1>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>Nome do titular do cartão:</label>
-                <input
-                  value={nomeCartao}
-                  onChange={(e) => {
-                    setnomeCartao(e.target.value);
-                  }}
-                  maxLength={30}
-                  className="border rounded px-3 py-2"
-                ></input>
-              </div>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>Número do cartão:</label>
-                <input
-                  value={numeroCartao}
-                  onChange={(e) => {
-                    setnumeroCartao(e.target.value);
-                  }}
-                  size={16}
-                  maxLength={16}
-                  className="border rounded px-3 py-2"
-                ></input>
-              </div>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>Data de validade do cartão:</label>
-                <input
-                  value={dataCartao}
-                  onChange={(e) => {
-                    setdataCartao(e.target.value);
-                  }}
-                  type="date"
-                  className="border rounded px-3 py-2"
-                ></input>
-              </div>
-              <div className="flex flex-row space-x-2 items-center justify-center">
-                <label>Código de segurança (CCV):</label>
-                <input
-                  value={codigoCartao}
-                  onChange={(e) => {
-                    setcodigoCartao(e.target.value);
-                  }}
-                  size={1}
-                  maxLength={3}
-                  className="border rounded px-3 py-2"
-                ></input>
-              </div>
-              <div className="flex flex-row items-center space-x-12">
-                <button
-                  type="button"
-                  className="rounded-md bg-red-500 px-4 py-2"
-                  onClick={() => {
-                    settipoPagamento("pix");
-                    setMsg("");
-                  }}
-                >
-                  Pix
-                </button>
-                <button
-                  className="rounded-md bg-green-500 px-4 py-2"
-                  type="submit"
-                >
-                  Confirmar
-                </button>
-              </div>
-              {msg && <div className="text-red-800 mt-5">{msg}</div>}
-            </div>
+          <form
+            onSubmit={confirmarcartao}
+            className="space-y-5 flex flex-col items-center justify-center my-5"
+          >
+            <Titulo>Pagamento por Cartão</Titulo>
+            <input
+              value={nomeCartao}
+              onChange={(e) => setnomeCartao(e.target.value)}
+              maxLength={30}
+              placeholder="Nome do Titular"
+              className="border rounded px-3 py-2"
+            />
+            <input
+              value={numeroCartao}
+              onChange={(e) => setnumeroCartao(e.target.value)}
+              maxLength={16}
+              placeholder="Número do Cartão"
+              className="border rounded px-3 py-2"
+            />
+            <input
+              value={dataCartao}
+              onChange={(e) => setdataCartao(e.target.value)}
+              type="date"
+              className="border rounded px-3 py-2"
+            />
+            <input
+              value={codigoCartao}
+              onChange={(e) => setcodigoCartao(e.target.value)}
+              maxLength={3}
+              placeholder="Código de Segurança"
+              className="border rounded px-3 py-2"
+            />
+            <button className="py-2 px-4 rounded-md bg-green-500" type="submit">
+              Confirmar
+            </button>
+            {msg && <div className="text-red-800 mt-5">{msg}</div>}
           </form>
         )}
       </FundoFormulariosInt>
