@@ -2,20 +2,36 @@
 
 import Interface from "../../components/Interface";
 import InfoReservInterf from "../../components/InfoReservInterf";
-import useSWR from "swr";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function InterfacePrincipal() {
-  const { data: reservas, error } = useSWR("/exitapi/reservas", fetcher);
+  const [reservas, setReservas] = useState([]);
+  const [msg, setMsg] = useState("");
 
-  /*if (error) {
-    return <div>Erro ao carregar as reservas!</div>;
-  }
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    console.log("Email do usuário:", userEmail);
 
-  if (!reservas) {
-    return <div>Carregando reservas...</div>;
-  }*/
+    if (!userEmail) {
+      setMsg("Usuário não encontrado.");
+      return;
+    }
+
+    axios
+      .get(`http://localhost:3000/reservas/interface?userEmail=${userEmail}`)
+      .then((response) => {
+        console.log("Dados recebidos:", response.data);
+        setReservas(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar horários ativos:", error);
+        setMsg(
+          error.response?.data?.message ||
+            "Erro ao buscar horários ativos. Tente novamente!"
+        );
+      });
+  }, []);
 
   return (
     <Interface>
@@ -27,13 +43,15 @@ export default function InterfacePrincipal() {
             </h1>
           </div>
 
-          {reservas && Array.isArray(reservas) && reservas.length > 0 ? (
-            reservas.map((reserva) => (
-              <InfoReservInterf key={reserva.id} reserva={reserva} />
-            ))
+          {reservas.length > 0 ? (
+            reservas.map((reserva) =>
+              reserva.id ? (
+                <InfoReservInterf key={reserva.id} reserva={reserva} />
+              ) : null
+            )
           ) : (
             <div className="text-center text-gray-800 font-bold mt-10">
-              Você não possui nenhuma reserva alugada!
+              {msg || "Você não possui nenhuma reserva alugada!"}
             </div>
           )}
         </div>

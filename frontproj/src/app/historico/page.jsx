@@ -35,8 +35,6 @@ export default function Historico() {
       });
   }, []);
 
-  console.log("Dados do histórico:", historico);
-
   return (
     <Interface>
       <div className="h-max w-full flex items-center justify-center">
