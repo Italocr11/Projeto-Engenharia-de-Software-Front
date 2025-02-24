@@ -19,7 +19,6 @@ function Quadro() {
   const dateInputRef = useRef(null);
   const baseValor = 40;
 
-  // Função para buscar os horários ocupados
   useEffect(() => {
     if (data) {
       const [year, month, day] = data.split("-");
@@ -29,7 +28,6 @@ function Quadro() {
         .get(`http://localhost:3000/reservas/quadro?data=${formattedDate}`)
 
         .then((response) => {
-          // Processar a resposta para garantir que seja um array de horários
           setHorariosOcupados(response.data.map((hora) => hora.horario));
           console.log(horariosOcupados);
         })
@@ -43,7 +41,6 @@ function Quadro() {
     }
   }, [data]);
 
-  // Função para solicitar a reserva
   const solicitar = (e) => {
     e.preventDefault();
 
@@ -65,15 +62,12 @@ function Quadro() {
     );
   };
 
-  // Função para selecionar o horário
   const handleSelectHorario = (horario) => {
-    // Só permite selecionar se o horário não estiver ocupado
     if (!horariosOcupados.includes(horario)) {
       setSelectedHorario((prev) => (prev === horario ? null : horario));
     }
   };
 
-  // Definir a data mínima no input de data
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     if (dateInputRef.current) {
@@ -88,7 +82,6 @@ function Quadro() {
       </h1>
 
       <div className="flex flex-row h-5/6 space-x-10 justify-center">
-        {/* Seção para selecionar data */}
         <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md">
           <div className="bg-black w-full text-white">
             <h1 className="text-center font-bold text-2xl mb-6 mt-8">
@@ -102,7 +95,6 @@ function Quadro() {
             onChange={(e) => setData(e.target.value)}
           />
 
-          {/* Equipamentos necessários */}
           <div className="text-black mt-10 space-y-1">
             <h3 className="font-bold mb-2">Equipamentos necessários:</h3>
             <div className="flex items-center space-x-2">
@@ -134,7 +126,6 @@ function Quadro() {
             </div>
           </div>
 
-          {/* Botão para solicitar a reserva */}
           <form onSubmit={solicitar}>
             <button
               type="submit"
@@ -146,7 +137,6 @@ function Quadro() {
           {msg && <div className="text-red-800 mt-8 pb-10">{msg}</div>}
         </div>
 
-        {/* Seção para selecionar horário */}
         <div className="flex flex-col items-center border-2 border-black shadow-xl w-2/6 rounded-md overflow-hidden">
           <div className="bg-black w-full text-white">
             <h1 className="text-center font-bold text-2xl mb-6 mt-8">

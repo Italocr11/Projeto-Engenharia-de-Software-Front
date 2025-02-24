@@ -2,28 +2,40 @@
 
 import InfoReservHist from "../../components/InfoReservHist";
 import Interface from "../../components/Interface";
-import { useState } from "react";
-import useSWR from "swr";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Historico() {
   const [filtroData, setFiltroData] = useState("");
   const [filtroHorario, setFiltroHorario] = useState(null);
+  const [historico, setHistorico] = useState([]);
+  const [msg, setMsg] = useState("");
 
-  const url = `/exitapi/historico?${filtroData ? `data=${filtroData}` : ""}${
-    filtroData && filtroHorario ? "&" : ""
-  }${filtroHorario ? `horario=${filtroHorario}` : ""}`;
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    console.log("Email do usuário:", userEmail);
 
-  const { data: historico, error } = useSWR(url, fetcher);
+    if (!userEmail) {
+      setMsg("Usuário não encontrado.");
+      return;
+    }
 
-  /*if (error) {
-    return <div>Erro ao carregar histórico!</div>;
-  }
+    axios
+      .get(`http://localhost:3000/reservas/historico?userEmail=${userEmail}`)
+      .then((response) => {
+        console.log("Dados recebidos:", response.data);
+        setHistorico(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setMsg(
+          error.response?.data?.message ||
+            "Erro ao buscar histórico. Tente novamente!"
+        );
+      });
+  }, []);
 
-  if (!historico) {
-    return <div>Carregando histórico...</div>;
-  }*/
+  console.log("Dados do histórico:", historico);
 
   return (
     <Interface>
@@ -76,16 +88,13 @@ export default function Historico() {
             </div>
           </div>
 
-          {historico && Array.isArray(historico) ? (
-            historico.map((historicoReservas) => (
-              <InfoReservHist
-                key={historicoReservas.id}
-                reserva={historicoReservas}
-              />
+          {historico.length > 0 ? (
+            historico.map((reserva) => (
+              <InfoReservHist key={reserva.id} reserva={reserva} />
             ))
           ) : (
             <div className="text-center text-gray-800 font-bold mt-10">
-              Você não alugou nenhuma reserva até o momento!
+              {msg || "Você não alugou nenhuma reserva até o momento!"}
             </div>
           )}
         </div>
