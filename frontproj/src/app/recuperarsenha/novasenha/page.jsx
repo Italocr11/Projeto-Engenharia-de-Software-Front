@@ -1,6 +1,6 @@
 "use client";
 
-import FundoFormularios from "../../../components/fundoFormularios";
+import FundoFormularios from "../../../components/FundoFormularios";
 import { useRouter } from "next/navigation";
 import Senha from "../../../components/Senha";
 import Titulo from "../../../components/Titulo";

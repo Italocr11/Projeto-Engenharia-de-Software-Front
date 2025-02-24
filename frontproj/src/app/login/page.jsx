@@ -1,6 +1,6 @@
 "use client";
 
-import FundoFormularios from "../../components/fundoFormularios";
+import FundoFormularios from "../../components/FundoFormularios";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import Email from "../../components/Email";
