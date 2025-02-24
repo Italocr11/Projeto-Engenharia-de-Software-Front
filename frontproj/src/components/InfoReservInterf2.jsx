@@ -13,15 +13,27 @@ export default function InfoReserv2({ reserva }) {
         <div className="flex flex-row space-x-4 items-center justify-center">
           <div className="flex flex-col items-center ">
             <label className="">Bola</label>
-            {reserva.bola ? <Check size={20}></Check> : <X size={20}></X>}
+            {reserva.bola ? (
+              <Check className="text-green-800" size={20}></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <p className="">Rede</p>
-            {reserva.rede ? <Check size={20}></Check> : <X size={20}></X>}
+            {reserva.rede ? (
+              <Check className="text-green-800" size={20}></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <p className="">Coletes</p>
-            {reserva.coletes ? <Check size={20}></Check> : <X size={20}></X>}
+            {reserva.coletes ? (
+              <Check className="text-green-800" size={20}></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
         </div>
       </div>

@@ -58,6 +58,16 @@ export default function Cancelar() {
 
       if (resultado.status === 200) {
         console.log("Reserva cancelada com sucesso!");
+
+        const userEmail = localStorage.getItem("userEmail");
+
+        await axios.post(`http://localhost:3000/notificacoes`, {
+          data: reservaInfo.data,
+          horario: reservaInfo.horario,
+          verif: false,
+          userEmail: userEmail,
+        });
+
         router.push("/interfacePrincipal");
       } else {
         console.error(

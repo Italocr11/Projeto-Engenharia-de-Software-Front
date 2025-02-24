@@ -13,7 +13,6 @@ export default function Historico() {
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
-    console.log("Email do usuário:", userEmail);
 
     if (!userEmail) {
       setMsg("Usuário não encontrado.");
