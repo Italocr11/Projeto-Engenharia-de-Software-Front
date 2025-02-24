@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Interface from "../../components/Interface";
 import FundoFormulariosInt from "../../components/FundoFormulariosInt";
@@ -10,6 +10,7 @@ import axios from "axios";
 
 export default function Cancelar() {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Melhor forma de pegar os parâmetros da URL no Next.js
 
   const [reservaInfo, setReservaInfo] = useState({
     data: "",
@@ -21,23 +22,39 @@ export default function Cancelar() {
   });
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
     setReservaInfo({
-      data: urlParams.get("data") || "",
-      horario: urlParams.get("horario") || "",
-      valor: urlParams.get("valor") || "",
-      bola: urlParams.get("bola") === "true",
-      rede: urlParams.get("rede") === "true",
-      coletes: urlParams.get("coletes") === "true",
+      data: searchParams.get("data") || "",
+      horario: searchParams.get("horario") || "",
+      valor: searchParams.get("valor") || "",
+      bola: searchParams.get("bola") === "true",
+      rede: searchParams.get("rede") === "true",
+      coletes: searchParams.get("coletes") === "true",
     });
-  }, [window.location.search]);
+  }, [searchParams.toString()]); // Agora está correto
 
   async function cancelarRes() {
+    if (!reservaInfo.data || !reservaInfo.horario) {
+      console.error("Erro: informações da reserva estão incompletas.");
+      return;
+    }
+
     try {
-      const queryParams = new URLSearchParams(reservaInfo).toString();
-      const resultado = await axios.delete(
-        `http://localhost:3000/usuarios/cancelar?${queryParams}`
-      );
+      const userEmail = localStorage.getItem("userEmail"); // Pegando o email do usuário
+
+      if (!userEmail) {
+        console.error("Erro: Usuário não encontrado.");
+        return;
+      }
+
+      const url = `http://localhost:3000/reservas/cancelar`;
+
+      const resultado = await axios.delete(url, {
+        params: {
+          userEmail: userEmail,
+          data: reservaInfo.data,
+          horario: reservaInfo.horario,
+        },
+      });
 
       if (resultado.status === 200) {
         console.log("Reserva cancelada com sucesso!");
@@ -49,7 +66,10 @@ export default function Cancelar() {
         );
       }
     } catch (error) {
-      console.error("Erro ao cancelar reserva:", error);
+      console.error(
+        "Erro ao cancelar reserva:",
+        error.response?.data || error.message
+      );
     }
   }
 
@@ -60,10 +80,11 @@ export default function Cancelar() {
         <h2 className="text-center font-bold mt-10 mb-4">Informações:</h2>
 
         <InfoReserv {...reservaInfo} />
+        <p className="font-bold mt-5">Seu dinheiro será estornado em breve!</p>
         <button
           type="button"
-          className="py-2 px-4 rounded-md bg-red-400 my-5"
-          disabled={!reservaInfo.data}
+          className="py-2 px-4 rounded-md bg-red-400 my-5 disabled:opacity-50"
+          disabled={!reservaInfo.data || !reservaInfo.horario}
           onClick={cancelarRes}
           aria-label="Cancelar reserva"
         >
