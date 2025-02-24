@@ -13,15 +13,27 @@ function InfoReserv({ data, horario, valor, bola, rede, coletes }) {
         <div className="flex flex-row space-x-3 items-center justify-center">
           <div className="flex flex-col items-center ">
             <label className="">Bola</label>
-            {bola ? <Check size={20}></Check> : <X size={20}></X>}
+            {bola ? (
+              <Check size={20} className="text-green-800"></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <p className="">Rede</p>
-            {rede ? <Check size={20}></Check> : <X size={20}></X>}
+            {rede ? (
+              <Check size={20} className="text-green-800"></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <p className="">Coletes</p>
-            {coletes ? <Check size={20}></Check> : <X size={20}></X>}
+            {coletes ? (
+              <Check size={20} className="text-green-800"></Check>
+            ) : (
+              <X className="text-red-600" size={20}></X>
+            )}
           </div>
         </div>
       </div>

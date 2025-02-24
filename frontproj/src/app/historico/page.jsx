@@ -7,13 +7,12 @@ import axios from "axios";
 
 export default function Historico() {
   const [filtroData, setFiltroData] = useState("");
-  const [filtroHorario, setFiltroHorario] = useState(null);
+  const [filtroHorario, setFiltroHorario] = useState("");
   const [historico, setHistorico] = useState([]);
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
-    console.log("Email do usuário:", userEmail);
 
     if (!userEmail) {
       setMsg("Usuário não encontrado.");
@@ -35,6 +34,41 @@ export default function Historico() {
       });
   }, []);
 
+  const formatarData = (data) => {
+    if (!data) return "";
+    const partes = data.split("-");
+    if (partes.length === 3) {
+      if (partes[0].length === 4) {
+        return `${partes[2].padStart(2, "0")}-${partes[1].padStart(2, "0")}-${
+          partes[0]
+        }`;
+      }
+
+      return `${partes[0].padStart(2, "0")}-${partes[1].padStart(2, "0")}-${
+        partes[2]
+      }`;
+    }
+    return data;
+  };
+
+  const historicoFiltrado = historico.filter((reserva) => {
+    const dataFormatada = filtroData ? formatarData(filtroData) : "";
+    const dataReservaFormatada = formatarData(reserva.data);
+    console.log(
+      "Data filtrada:",
+      dataFormatada,
+      "Data reserva:",
+      dataReservaFormatada
+    );
+    const dataCondicao = filtroData
+      ? dataReservaFormatada === dataFormatada
+      : true;
+    const horarioCondicao = filtroHorario
+      ? reserva.horario === filtroHorario
+      : true;
+    return dataCondicao && horarioCondicao;
+  });
+
   return (
     <Interface>
       <div className="h-max w-full flex items-center justify-center">
@@ -48,51 +82,41 @@ export default function Historico() {
             </div>
             <div>
               <label className="text-blue-600 mr-2">Data:</label>
-
               <input
                 type="date"
                 className="border rounded px-3 py-2"
                 value={filtroData}
-                onChange={(e) => {
-                  setFiltroData(e.target.value);
-                }}
-              ></input>
+                onChange={(e) => setFiltroData(e.target.value)}
+              />
             </div>
             <div>
               <label className="text-blue-600 mr-2">Horário:</label>
               <select
-                className="appearance-none border-2 border-gray-300 rounded-lg p-1 text-base max-w-xs focus:border-blue-500
-             focus:bg-blue-50 transition-colors duration-300 text-center"
-                onChange={(e) => {
-                  setFiltroHorario(e.target.value);
-                }}
+                className="appearance-none border-2 border-gray-300 rounded-lg p-1 text-base max-w-xs focus:border-blue-500 focus:bg-blue-50 transition-colors duration-300 text-center"
+                value={filtroHorario}
+                onChange={(e) => setFiltroHorario(e.target.value)}
               >
-                <option value={"8:00"}>8:00</option>
-                <option value={"9:00"}>9:00</option>
-                <option value={"10:00"}>10:00</option>
-                <option value={"11:00"}>11:00</option>
-                <option value={"12:00"}>12:00</option>
-                <option value={"13:00"}>13:00</option>
-                <option value={"14:00"}>14:00</option>
-                <option value={"15:00"}>15:00</option>
-                <option value={"16:00"}>16:00</option>
-                <option value={"17:00"}>17:00</option>
-                <option value={"18:00"}>18:00</option>
-                <option value={"19:00"}>19:00</option>
-                <option value={"20:00"}>20:00</option>
-                <option value={"21:00"}>21:00</option>
-                <option value={"22:00"}>22:00</option>
+                <option value="">Todos</option>
+                {[...Array(15)].map((_, i) => {
+                  const hour = i + 8;
+                  return (
+                    <option key={hour} value={`${hour}:00`}>
+                      {hour}:00
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
 
-          {historico.length > 0 ? (
-            historico.map((reserva) => (
+          {historicoFiltrado.length > 0 ? (
+            historicoFiltrado.map((reserva) => (
               <InfoReservHist key={reserva.id} reserva={reserva} />
             ))
           ) : (
             <div className="text-center text-gray-800 font-bold mt-10">
-              {msg || "Você não alugou nenhuma reserva até o momento!"}
+              {msg ||
+                "Nenhuma reserva encontrada para os filtros selecionados."}
             </div>
           )}
         </div>
