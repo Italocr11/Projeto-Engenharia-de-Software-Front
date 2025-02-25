@@ -1,22 +1,31 @@
 "use client";
+
 import Interface from "@/components/Interface";
-import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Perfil() {
   const router = useRouter();
+  const [userData, setUserData] = useState({
+    nome: "",
+    tel: "",
+    email: "",
+  });
 
-  var email = localStorage.getItem("userEmail");
-  var tel = localStorage.getItem("userTel");
-  var nome = localStorage.getItem("userNome");
-
-  /*useEffect(() => {
-    const userEmail = localStorage.getItem("userEmail");
-    if (!userEmail) {
-      router.replace("/login"); // Redireciona se o usuário não estiver logado
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const email = localStorage.getItem("userEmail");
+      if (!email) {
+        router.replace("/login"); // Redireciona se o usuário não estiver logado
+      } else {
+        setUserData({
+          nome: localStorage.getItem("userNome") || "",
+          tel: localStorage.getItem("userTel") || "",
+          email,
+        });
+      }
     }
-  }, []);*/
+  }, []);
 
   return (
     <Interface>
@@ -29,12 +38,12 @@ function Perfil() {
               alt="perfil"
               width={90}
               height={50}
-            ></img>
+            />
           </div>
           <div className="flex flex-col items-start">
             <div className="flex flex-row space-x-3 mt-5 mb-10 justify-center items-center">
               <p>Nome:</p>
-              <p className="text-purple-900">{nome}</p>
+              <p className="text-purple-900">{userData.nome}</p>
               <button
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
                 onClick={() => router.push("/alterarNome")}
@@ -44,7 +53,7 @@ function Perfil() {
             </div>
             <div className="flex flex-row space-x-3 mb-10 items-center justify-center">
               <p>Telefone:</p>
-              <p className="text-purple-900">{tel}</p>
+              <p className="text-purple-900">{userData.tel}</p>
               <button
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
                 onClick={() => router.push("/alterarTelefone")}
@@ -54,7 +63,7 @@ function Perfil() {
             </div>
             <div className="flex flex-row space-x-3 items-center justify-center">
               <p>Email:</p>
-              <p className="text-purple-900">{email}</p>
+              <p className="text-purple-900">{userData.email}</p>
               <button
                 onClick={() => router.push("/alterarEmail")}
                 className="bg-amber-300 py-2 px-2 rounded-md text-gray-800 hover:text-white"
@@ -76,11 +85,6 @@ function Perfil() {
                 localStorage.removeItem("userEmail");
                 localStorage.removeItem("userNome");
                 localStorage.removeItem("userTel");
-
-                window.history.pushState(null, "", window.location.href);
-                window.onpopstate = function () {
-                  window.history.pushState(null, "", window.location.href);
-                };
 
                 router.replace("/login");
               }}

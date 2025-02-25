@@ -7,7 +7,7 @@ import Titulo from "../../components/Titulo";
 import InfoReserv from "../../components/InfoReserv";
 import { useState, useEffect } from "react";
 
-export default function solicitarReserva() {
+export default function SolicitarReserva() {
   const router = useRouter();
   const [reservaInfo, setReservaInfo] = useState({
     esporte: null,
@@ -20,16 +20,18 @@ export default function solicitarReserva() {
   });
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setReservaInfo({
-      esporte: urlParams.get("esporte"),
-      valor: urlParams.get("valor"),
-      horario: urlParams.get("horario"),
-      data: urlParams.get("data"),
-      bola: urlParams.get("bola") === "true",
-      rede: urlParams.get("rede") === "true",
-      coletes: urlParams.get("coletes") === "true",
-    });
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      setReservaInfo({
+        esporte: urlParams.get("esporte"),
+        valor: urlParams.get("valor"),
+        horario: urlParams.get("horario"),
+        data: urlParams.get("data"),
+        bola: urlParams.get("bola") === "true",
+        rede: urlParams.get("rede") === "true",
+        coletes: urlParams.get("coletes") === "true",
+      });
+    }
   }, []);
 
   const [esporte, setEsporte] = useState("Futsal");
