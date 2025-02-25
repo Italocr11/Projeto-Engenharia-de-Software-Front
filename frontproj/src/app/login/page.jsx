@@ -76,17 +76,6 @@ function Login() {
           </div>
         </form>
         {msg && <div className="text-red-800 mb-5">{msg}</div>}
-        <div className="text-amber-800 flex items-center mb-10">
-          <ArrowRight />
-          <button
-            onClick={() => {
-              router.push("/recuperarsenha");
-            }}
-            className="m-1"
-          >
-            Recuperar senha
-          </button>
-        </div>
       </div>
     </FundoFormularios>
   );

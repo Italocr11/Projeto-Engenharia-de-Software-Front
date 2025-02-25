@@ -11,53 +11,52 @@ export default function Pagamento() {
   const [tipoPagamento, settipoPagamento] = useState("");
   const [msg, setMsg] = useState("");
 
-  const [nomeCartao, setnomeCartao] = useState("");
-  const [numeroCartao, setnumeroCartao] = useState("");
-  const [dataCartao, setdataCartao] = useState("");
-  const [codigoCartao, setcodigoCartao] = useState("");
+  const [nomeCartao, setNomeCartao] = useState("");
+  const [numeroCartao, setNumeroCartao] = useState("");
+  const [dataCartao, setDataCartao] = useState("");
+  const [codigoCartao, setCodigoCartao] = useState("");
 
-  const [chavePix, setchavePix] = useState("");
+  const [chavePix, setChavePix] = useState("");
   const [qrCode, setQrCode] = useState("");
 
   const router = useRouter();
 
   const [reservaInfo, setReservaInfo] = useState({
-    esporte: null,
-    valor: null,
-    horario: null,
-    data: null,
-    bola: null,
-    rede: null,
-    coletes: null,
+    userEmail: "",
+    esporte: "",
+    valor: "",
+    horario: "",
+    data: "",
+    bola: false,
+    rede: false,
+    coletes: false,
   });
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+
+    // Formata a data para DD-MM-YYYY
+    const dataISO = urlParams.get("data") || "";
+    const dataFormatada = dataISO ? dataISO.split("-").reverse().join("-") : "";
+
     setReservaInfo({
-      esporte: urlParams.get("esporte"),
-      valor: urlParams.get("valor"),
-      horario: urlParams.get("horario"),
-      data: urlParams.get("data"),
+      userEmail: localStorage.getItem("userEmail") || "",
+      esporte: urlParams.get("esporte") || "",
+      valor: urlParams.get("valor") || "",
+      horario: urlParams.get("horario") || "",
+      data: dataFormatada,
       bola: urlParams.get("bola") === "true",
       rede: urlParams.get("rede") === "true",
       coletes: urlParams.get("coletes") === "true",
     });
   }, []);
 
-  const confirmarpix = async (e) => {
+  const confirmarPagamentoPix = async (e) => {
     e.preventDefault();
 
-    if (!chavePix) {
-      setMsg("Informe uma chave pix!");
-      return;
-    }
-
     try {
-      const resultado = await axios.post("http://localhost:3000/pagamentopix", {
-        chavePix,
-      });
-      await axios.post("http://localhost:3000/reserva", { ...reservaInfo });
-      setQrCode(resultado.data.qrCode);
+      await axios.post("http://localhost:3000/reservas", { ...reservaInfo });
+
       setMsg("");
       router.push("/pagamento/realizado");
     } catch (error) {
@@ -68,7 +67,23 @@ export default function Pagamento() {
     }
   };
 
-  const confirmarcartao = async (e) => {
+  const confirmarPagamentoCartao = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:3000/reservas", { ...reservaInfo });
+
+      setMsg("");
+      router.push("/pagamento/realizado");
+    } catch (error) {
+      setMsg(
+        error.response?.data?.message ||
+          "Erro ao realizar pagamento. Tente novamente."
+      );
+    }
+  };
+
+  /*const confirmarPagamentoCartao = async (e) => {
     e.preventDefault();
 
     if (!nomeCartao || !numeroCartao || !dataCartao || !codigoCartao) {
@@ -83,7 +98,9 @@ export default function Pagamento() {
         dataCartao,
         codigoCartao,
       });
-      await axios.post("http://localhost:3000/reserva", { ...reservaInfo });
+
+      await axios.post("http://localhost:3000/reservas", { ...reservaInfo });
+
       setMsg("");
       router.push("/pagamento/realizado");
     } catch (erro) {
@@ -92,7 +109,7 @@ export default function Pagamento() {
           "Erro ao realizar pagamento. Tente novamente."
       );
     }
-  };
+  };*/
 
   return (
     <Interface>
@@ -118,13 +135,13 @@ export default function Pagamento() {
 
         {tipoPagamento === "pix" && (
           <form
-            onSubmit={confirmarpix}
+            onSubmit={confirmarPagamentoPix}
             className="space-y-5 flex flex-col items-center justify-center my-5"
           >
             <Titulo>Pagamento por Pix</Titulo>
             <input
               value={chavePix}
-              onChange={(e) => setchavePix(e.target.value)}
+              onChange={(e) => setChavePix(e.target.value)}
               maxLength={30}
               placeholder="Chave Pix"
               className="border rounded px-3 py-2"
@@ -138,33 +155,33 @@ export default function Pagamento() {
 
         {tipoPagamento === "cartão" && (
           <form
-            onSubmit={confirmarcartao}
+            onSubmit={confirmarPagamentoCartao}
             className="space-y-5 flex flex-col items-center justify-center my-5"
           >
             <Titulo>Pagamento por Cartão</Titulo>
             <input
               value={nomeCartao}
-              onChange={(e) => setnomeCartao(e.target.value)}
+              onChange={(e) => setNomeCartao(e.target.value)}
               maxLength={30}
               placeholder="Nome do Titular"
               className="border rounded px-3 py-2"
             />
             <input
               value={numeroCartao}
-              onChange={(e) => setnumeroCartao(e.target.value)}
+              onChange={(e) => setNumeroCartao(e.target.value)}
               maxLength={16}
               placeholder="Número do Cartão"
               className="border rounded px-3 py-2"
             />
             <input
               value={dataCartao}
-              onChange={(e) => setdataCartao(e.target.value)}
+              onChange={(e) => setDataCartao(e.target.value)}
               type="date"
               className="border rounded px-3 py-2"
             />
             <input
               value={codigoCartao}
-              onChange={(e) => setcodigoCartao(e.target.value)}
+              onChange={(e) => setCodigoCartao(e.target.value)}
               maxLength={3}
               placeholder="Código de Segurança"
               className="border rounded px-3 py-2"
