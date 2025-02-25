@@ -13,7 +13,7 @@ Raíz do projeto -> pasta "frontproj"
 Instalar dependências: npm install
 
 Algumas bibliotecas e depêndencias do projeto sendo:
- ● Axios,
+ ● Axios
  ● Lucide-react
  ● TailwindCSS
  ● SWR
@@ -23,4 +23,4 @@ Para executar -> npm run dev
 
 Para build -> npm run build
 
-O projeto deverá ser executado na porta 3001, sendo o back na porta 3001!
+O projeto deverá ser executado na porta 3001, sendo o back na porta 3000!
