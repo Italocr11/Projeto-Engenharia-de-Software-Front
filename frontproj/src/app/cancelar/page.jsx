@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Interface from "../../components/Interface";
 import FundoFormulariosInt from "../../components/FundoFormulariosInt";
 import Titulo from "../../components/Titulo";
@@ -9,8 +9,16 @@ import InfoReserv from "../../components/InfoReserv";
 import axios from "axios";
 
 export default function Cancelar() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <CancelarContent />
+    </Suspense>
+  );
+}
+
+function CancelarContent() {
   const router = useRouter();
-  const searchParams = useSearchParams(); // Melhor forma de pegar os parâmetros da URL no Next.js
+  const searchParams = useSearchParams();
 
   const [reservaInfo, setReservaInfo] = useState({
     data: "",
@@ -30,7 +38,7 @@ export default function Cancelar() {
       rede: searchParams.get("rede") === "true",
       coletes: searchParams.get("coletes") === "true",
     });
-  }, [searchParams.toString()]); // Agora está correto
+  }, [searchParams.toString()]);
 
   async function cancelarRes() {
     if (!reservaInfo.data || !reservaInfo.horario) {
@@ -39,7 +47,7 @@ export default function Cancelar() {
     }
 
     try {
-      const userEmail = localStorage.getItem("userEmail"); // Pegando o email do usuário
+      const userEmail = localStorage.getItem("userEmail");
 
       if (!userEmail) {
         console.error("Erro: Usuário não encontrado.");
@@ -58,8 +66,6 @@ export default function Cancelar() {
 
       if (resultado.status === 200) {
         console.log("Reserva cancelada com sucesso!");
-
-        const userEmail = localStorage.getItem("userEmail");
 
         await axios.post(`http://localhost:3000/notificacoes`, {
           data: reservaInfo.data,
