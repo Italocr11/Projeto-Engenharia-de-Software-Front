@@ -3,21 +3,21 @@
 Repositório referente a estrutura de front-end do projeto de Engenharia de Software
 
 Tecnologias do projeto: 
-  JavaScript
-  Reactjs
-  Nextjs
-  Jest para testes
+ ● JavaScript
+ ● Reactjs
+ ● Nextjs
+ ● Jest para testes
 
 Raíz do projeto -> pasta "frontproj"
 
 Instalar dependências: npm install
 
 Algumas bibliotecas e depêndencias do projeto sendo:
-  Axios
-  Lucide-react
-  TailwindCSS
-  SWR
-  Eslint
+ ● Axios,
+ ● Lucide-react
+ ● TailwindCSS
+ ● SWR
+ ● Eslint
 
 Para executar -> npm run dev
 
